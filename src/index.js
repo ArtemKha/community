@@ -1,33 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiThemeProvider, createMuiTheme  } from 'material-ui/styles';
-import 'typeface-roboto';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
+import { MuiThemeProvider } from 'material-ui/styles';
+import theme from './MaterialUiTheme';
 import './css/index.css';
-import App from './containers';
+import './css/App.css';
+
+import NoteList from './containers/NoteList';
+import EditNote from './containers/EditNote';
 import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
-import NoteReducer from './reducers';
 import { Provider } from 'react-redux';
-
-
-import createPalette from 'material-ui/styles/palette';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
-import red from 'material-ui/colors/red';
-
-const theme = createMuiTheme({
-  palette: createPalette({
-    primary: purple, // Purple and green play nicely together.
-    accent: {
-      ...green,
-      A400: '#00e677',
-    },
-    error: red,
-  }),
-});
-
+import NoteReducer from './reducers';
 
 const store = createStore(
   NoteReducer,
@@ -37,7 +23,12 @@ const store = createStore(
 ReactDOM.render(
 	<Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={NoteList}/>
+          <Route path="/edit/:id" component={EditNote}/>
+        </Switch>
+      </BrowserRouter>
     </MuiThemeProvider>
   </Provider>,
 	document.getElementById('root')
