@@ -13,10 +13,9 @@ class Notes extends Component {
   }
 
   render() {
-    const { notes, ownProps } = this.props;
-    console.log(ownProps)
+    const { notes } = this.props;
     const NoteList = notes.map(note => (
-      <Note note={note} key={note.id}/>
+      <Note note={note} key={note.id} history={this.props.history}/>
     ));
 
     return (

@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
-import { addNote, removeNote, updateNote } from '../actions';
+import { connect } from 'react-redux'
+import { addNote, removeNote, updateNote } from '../actions'
 
-import NoteList from '../components/NoteList';
+import NoteList from '../components/NoteList'
 
 
 function mapStateToProps(state, ownProps) {
@@ -19,4 +19,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteList);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteList)

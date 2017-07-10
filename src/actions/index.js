@@ -1,6 +1,6 @@
 import * as NoteActionTypes from '../actiontypes';
 
-export const addNote = (note) => {
+export const addNote = note => {
   return {
     type: NoteActionTypes.ADD_NOTE,
     note
@@ -14,10 +14,9 @@ export const removeNote = index => {
   };
 };
 
-export const updateNote = (index, note)  => {
+export const updateNote = note => {
   return {
     type: NoteActionTypes.EDIT_NOTE,
-    index,
     note
   };
 };

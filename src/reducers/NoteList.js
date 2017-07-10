@@ -17,8 +17,8 @@ export default function NoteList (state = notes, action) {
 
     case NoteActionTypes.EDIT_NOTE:
       return [
-        ...state.map((note, index) => {
-          if (index === action.index){
+        ...state.map(note => {
+          if (note.id === action.note.id){
             return {
               ...note,
               title: action.note.title,

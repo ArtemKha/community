@@ -1,34 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import EditButton from './EditButton'
 import TextFields from './TextFields'
 
 class EditNote extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      disabled: true
-    }
-  }
-
-  changeActive = () => {
-    const disabled = this.state.disabled
-    this.setState({
-      disabled: !disabled
-    })
-  }
-
   static propTypes = {
-    //
+    notes: PropTypes.array.isRequired,
+    addNote: PropTypes.func.isRequired,
+    removeNote: PropTypes.func.isRequired,
+    updateNote: PropTypes.func.isRequired,
   }
 
   render() {
-    const { ownProps, note } = this.props
+    const { notes, match } = this.props
+    const note = notes.find(note => note.id === match.params.id)
+
     return (
       <div>
-        <TextFields disabled={this.state.disabled}/>
-        <EditButton changeActive={this.changeActive} disabled={this.state.disabled}/>
+        <TextFields note={note} updateNote={this.props.updateNote}/>
       </div>
     )
   }
