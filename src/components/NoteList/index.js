@@ -14,8 +14,8 @@ class Notes extends Component {
 
   render() {
     const { notes } = this.props;
-    const NoteList = notes.map(note => (
-      <Note note={note} key={note.id} history={this.props.history}/>
+    const NoteList = notes.map((note, i) => (
+      <Note note={note} key={note.id} index={i} history={this.props.history}/>
     ));
 
     return (
