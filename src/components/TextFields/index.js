@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import Buttons from './Buttons'
+import ControlButtons from './ControlButtons'
+import NoteBar from './NoteBar'
 
 const styleSheet = createStyleSheet('TextFields', theme => ({
   container: {
@@ -19,10 +20,25 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
 class TextFields extends Component {
   constructor(props) {
     super(props);
-
+    let note, noteIndex, isNew, isNoteDisabled
     const { notes, match } = this.props
-    const noteIndex = notes.findIndex((note) => note.id === match.params.id)
-    const note = notes[noteIndex]
+
+    //check for adding or editing and fillout the fields, flags
+    if (match.params.id === 'new') {
+      noteIndex = notes.length
+      note = {
+        id: this.idGenerator(notes),
+        title: '',
+        text: ''
+      }
+      isNew = true
+      isNoteDisabled = false
+    } else {
+      noteIndex = notes.findIndex((note) => note.id === match.params.id)
+      note = notes[noteIndex]
+      isNew = false
+      isNoteDisabled = true
+    }
 
     this.state = {
       note: {
@@ -31,7 +47,8 @@ class TextFields extends Component {
         text: note.text,
         index: noteIndex
       },
-      disabled: true,
+      isNew: isNew,
+      isNoteDisabled: isNoteDisabled,
     }
   }
 
@@ -43,13 +60,21 @@ class TextFields extends Component {
     removeNote: PropTypes.func.isRequired,
   }
 
-  changeActive = () => {
-    const {note, disabled} = this.state
+  idGenerator (array, prefix = '00') {
+    return prefix + (Number([...array].splice(-1, 1)[0].id) + 1)
+  }
+
+  handleEditButton = () => {
+    const {note, isNoteDisabled, isNew} = this.state
     this.setState({
-      disabled: !disabled
+      isNoteDisabled: !isNoteDisabled
     })
-    if (!disabled)
+    if (!isNoteDisabled && isNew === false) {
       this.props.updateNote(note)
+    } else if (isNew === true) {
+      this.props.addNote(note)
+      this.props.history.push('/')
+    }
   }
 
   removeNote = () => {
@@ -77,8 +102,9 @@ class TextFields extends Component {
             ...note,
             title: event.target.value}})}
           marginForm
-          disabled={this.state.disabled}
+          disabled={this.state.isNoteDisabled}
         />
+        <NoteBar isNew={this.state.isNew} removeNote={this.removeNote}/>
         <TextField
           id="multiline"
           label="Note"
@@ -91,13 +117,13 @@ class TextFields extends Component {
           multiline
           rowsMax="24"
           marginForm
-          disabled={this.state.disabled}
+          disabled={this.state.isNoteDisabled}
+          autoFocus
         />
-        <Buttons
-          changeActive={this.changeActive}
+        <ControlButtons
+          handleEditButton={this.handleEditButton}
           toList={this.toList}
-          removeNote={this.removeNote}
-          disabled={this.state.disabled}
+          disabled={this.state.isNoteDisabled}
         />
       </div>
     )

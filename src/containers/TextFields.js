@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { addNote, removeNote, updateNote } from '../actions'
 
-import EditNote from '../components/EditNote'
+import TextFields from '../components/TextFields'
 
 
 function mapStateToProps(state) {
@@ -18,4 +18,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditNote)
+export default connect(mapStateToProps, mapDispatchToProps)(TextFields)

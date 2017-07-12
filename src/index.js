@@ -8,7 +8,7 @@ import './css/index.css'
 import './css/App.css'
 
 import NoteList from './containers/NoteList'
-import EditNote from './containers/EditNote'
+import TextFields from './containers/TextFields'
 import registerServiceWorker from './registerServiceWorker'
 
 import { createStore } from 'redux'
@@ -26,7 +26,8 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={NoteList}/>
-          <Route path="/edit/:id" component={EditNote}/>
+          <Route path="/edit/:id" component={TextFields}/>
+          <Route path="/edit/new" component={TextFields}/>
         </Switch>
       </BrowserRouter>
     </MuiThemeProvider>

@@ -21,7 +21,7 @@ class Notes extends Component {
     return (
       <div>
         {NoteList}
-        <Navigation />
+        <Navigation history={this.props.history}/>
       </div>
     );
   }
