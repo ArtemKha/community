@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import ControlButtons from './ControlButtons'
+import ControlButtons from '../../containers/ControlButtons'
 import NoteBar from './NoteBar'
 
 const styleSheet = createStyleSheet('TextFields', theme => ({
@@ -19,18 +19,14 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
 
 class TextFields extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     let note, noteIndex, isNew, isNoteDisabled
     const { notes, match } = this.props
 
-    //check for adding or editing and fillout the fields, flags
+    //check for adding or editing
     if (match.params.id === 'new') {
       noteIndex = notes.length
-      note = {
-        id: this.idGenerator(notes),
-        title: '',
-        text: ''
-      }
+      note = { id: this.idGenerator(notes), title: '', text: '' }
       isNew = true
       isNoteDisabled = false
     } else {
@@ -42,9 +38,7 @@ class TextFields extends Component {
 
     this.state = {
       note: {
-        id: note.id,
-        title: note.title,
-        text: note.text,
+        ...note,
         index: noteIndex
       },
       isNew: isNew,
@@ -55,8 +49,6 @@ class TextFields extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     notes: PropTypes.array.isRequired,
-    updateNote: PropTypes.func.isRequired,
-    addNote: PropTypes.func.isRequired,
     removeNote: PropTypes.func.isRequired,
   }
 
@@ -64,26 +56,16 @@ class TextFields extends Component {
     return prefix + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
-  handleEditButton = () => {
-    const {note, isNoteDisabled, isNew} = this.state
-    this.setState({
-      isNoteDisabled: !isNoteDisabled
-    })
-    if (!isNoteDisabled && isNew === false) {
-      this.props.updateNote(note)
-    } else if (isNew === true) {
-      this.props.addNote(note)
-      this.props.history.push('/')
-    }
-  }
-
   removeNote = () => {
     this.props.removeNote(this.state.note.index)
     this.props.history.push('/')
   }
 
-  toList = () => {
-    this.props.history.push('/')
+  handleNoteDisabled = () => {
+    const { isNoteDisabled } = this.state
+    this.setState({
+      isNoteDisabled: !isNoteDisabled
+    })
   }
 
   render() {
@@ -121,9 +103,9 @@ class TextFields extends Component {
           autoFocus
         />
         <ControlButtons
-          handleEditButton={this.handleEditButton}
-          toList={this.toList}
-          disabled={this.state.isNoteDisabled}
+          textState={this.state}
+          history={this.props.history}
+          handleNoteDisabled={this.handleNoteDisabled}
         />
       </div>
     )

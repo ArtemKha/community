@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation'
+import BottomNavigation, { BottomNavigationButton }
+  from 'material-ui/BottomNavigation'
 import SearchIcon from 'material-ui-icons/Search'
 import MenuIcon from 'material-ui-icons/Menu'
 import AddCircle from 'material-ui-icons/AddCircle'
-import Drawer from './Drawer'
+import Menu from './Menu'
+import Search from './Search'
 
 const styleSheet = createStyleSheet('SimpleBottomNavigation', {
   root: {
@@ -20,8 +22,7 @@ class SimpleBottomNavigation extends Component {
     super(props)
 
     this.state = {
-      index: -1,
-      drawer: false,
+      menu: false,
       search: false,
     }
   }
@@ -31,26 +32,31 @@ class SimpleBottomNavigation extends Component {
     history: PropTypes.object.isRequired,
   }
 
-  handleChange = (event, index) => {
-    this.setState({ index })
-  }
-
-  openFields = () => {
+  handleNewButton = () => {
     this.props.history.push('/edit/new')
   }
 
-  showDrawer = () => {
-    let drawer = this.state.drawer
+  handleMenuDrawer = () => {
+    let menu = this.state.menu
     this.setState({
-      drawer: !drawer
+      menu: !menu
     })
   }
 
-  showSearch = () => {
+  handleSearchDrawer = () => {
     let search = this.state.search
     this.setState({
       search: !search
     })
+  }
+
+  handleSearchInput = (query) => {
+    this.props.history.push(`/?q=${query}`)
+  }
+
+  // clear url from query on mount
+  componentDidMount(){
+    this.props.history.push('/')
   }
 
   render() {
@@ -59,12 +65,20 @@ class SimpleBottomNavigation extends Component {
 
     return (
       <div className={classes.root}>
-        <BottomNavigation index={index} onChange={this.handleChange} showLabels>
-          <BottomNavigationButton label="Search" icon={<SearchIcon />} />
-          <BottomNavigationButton label="New" icon={<AddCircle />} onClick={this.openFields}/>
-          <BottomNavigationButton label="Menu" icon={<MenuIcon />} onClick={this.showDrawer}/>
+        <BottomNavigation index={index} showLabels>
+          <BottomNavigationButton label="Search"
+            icon={<SearchIcon />} onClick={this.handleSearchDrawer} />
+          <BottomNavigationButton label="New"
+            icon={<AddCircle />} onClick={this.handleNewButton}/>
+          <BottomNavigationButton label="Menu"
+            icon={<MenuIcon />} onClick={this.handleMenuDrawer}/>
         </BottomNavigation>
-        <Drawer drawer={this.state.drawer} showDrawer={this.showDrawer}/>
+
+        <Menu menu={this.state.menu}
+          handleMenuDrawer={this.handleMenuDrawer}/>
+        <Search search={this.state.search}
+          handleSearchDrawer={this.handleSearchDrawer}
+          handleSearchInput={this.handleSearchInput}/>
       </div>
     )
   }

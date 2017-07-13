@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Button from 'material-ui/Button'
@@ -23,27 +23,57 @@ const styleSheet = createStyleSheet('FloatingActionButtons', theme => ({
   },
 }));
 
-function FloatingActionButtons(props) {
-  const {classes, toList, handleEditButton} = props
-  let editIcon = props.disabled ? <EditIcon /> : <SaveIcon />
+class FloatingActionButtons extends Component {
 
-  return (
-    <div>
-      <Button fab color="accent" className={classes.main} onClick={handleEditButton}>
-        {editIcon}
-      </Button>
-      <Button fab color="default" className={classes.shifted} onClick={toList}>
-        <ArrowBack />
-      </Button>
-    </div>
-  )
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    textState: PropTypes.shape({
+      note: PropTypes.object.isRequired,
+      isNew: PropTypes.bool.isRequired,
+      isNoteDisabled: PropTypes.bool.isRequired,
+    }).isRequired,
+    addNote: PropTypes.func.isRequired,
+    updateNote: PropTypes.func.isRequired,
+
+  };
+
+  handleEditButton = () => {
+    const { note, isNoteDisabled, isNew } = this.props.textState
+    this.props.handleNoteDisabled()
+
+    if (!isNoteDisabled && isNew === false) {
+      this.props.updateNote(note)
+    } else if (isNew === true) {
+      this.props.addNote(note)
+      this.props.history.push('/')
+    }
+  }
+
+  moveToList = () => {
+    this.props.history.push('/')
+  }
+
+  render() {
+    const { classes, ownProps } = this.props
+    const { isNoteDisabled } = this.props.textState
+    const EditButton = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
+
+    return (
+      <div>
+        <Button fab color="accent" className={classes.main}
+          onClick={this.handleEditButton}>
+          <EditButton/>
+        </Button>
+        <Button fab color="default" className={classes.shifted}
+          onClick={this.moveToList}>
+          <ArrowBack />
+        </Button>
+      </div>
+    )
+  }
 }
 
-FloatingActionButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  handleEditButton: PropTypes.func.isRequired,
-  toList: PropTypes.func.isRequired,
-};
+
 
 export default withStyles(styleSheet)(FloatingActionButtons)

@@ -1,15 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from './MaterialUiTheme'
 import './css/index.css'
 import './css/App.css'
 
+import registerServiceWorker from './registerServiceWorker'
 import NoteList from './containers/NoteList'
 import TextFields from './containers/TextFields'
-import registerServiceWorker from './registerServiceWorker'
+import SignUp from './components/SignUp'
+import App from './containers/App'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -27,7 +29,9 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={NoteList}/>
           <Route path="/edit/:id" component={TextFields}/>
-          <Route path="/edit/new" component={TextFields}/>
+          <Route path="/?q=:search" component={NoteList}/>
+          <Route path="/signup" component={SignUp}/>
+          {/* <Redirect from="/" to="/edit/new" /> */}
         </Switch>
       </BrowserRouter>
     </MuiThemeProvider>
