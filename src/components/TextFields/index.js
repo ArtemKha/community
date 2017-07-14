@@ -9,40 +9,29 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    'flexDirection': 'row',
+    'justify-content': 'center',
+    // border: '5px solid red',
   },
   input: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '100%',
   },
+  main: {
+    // border: '5px solid green',
+    'flex-grow': 1,
+  }
 }))
 
 class TextFields extends Component {
   constructor(props) {
     super(props)
-    let note, noteIndex, isNew, isNoteDisabled
-    const { notes, match } = this.props
-
-    //check for adding or editing
-    if (match.params.id === 'new') {
-      noteIndex = notes.length
-      note = { id: this.idGenerator(notes), title: '', text: '' }
-      isNew = true
-      isNoteDisabled = false
-    } else {
-      noteIndex = notes.findIndex((note) => note.id === match.params.id)
-      note = notes[noteIndex]
-      isNew = false
-      isNoteDisabled = true
-    }
 
     this.state = {
-      note: {
-        ...note,
-        index: noteIndex
-      },
-      isNew: isNew,
-      isNoteDisabled: isNoteDisabled,
+      note: {},
+      isNew: '',
+      isNoteDisabled: '',
     }
   }
 
@@ -68,12 +57,41 @@ class TextFields extends Component {
     })
   }
 
+  componentWillMount() {
+    let note, noteIndex, isNew, isNoteDisabled
+    const { notes } = this.props
+    const { match } = this.props
+
+    //check for adding or editing
+    if (match.params.id === 'new') {
+      noteIndex = notes.length
+      note = { id: this.idGenerator(notes), title: '', text: '' }
+      isNew = true
+      isNoteDisabled = false
+    } else {
+      noteIndex = notes.findIndex((note) => note.id === match.params.id)
+      note = notes[noteIndex]
+      isNew = false
+      isNoteDisabled = true
+    }
+
+    this.setState({
+      note: { ...note, index: noteIndex },
+      isNew: isNew,
+      isNoteDisabled: isNoteDisabled,
+    })
+  }
+
   render() {
     const { classes } = this.props
+    const { history } = this.props
     const { note } = this.state
     const { title, text } = note
 
+
+
     return (
+      <div className={classes.main}>
       <div className={classes.container}>
         <TextField
           id="name"
@@ -102,9 +120,10 @@ class TextFields extends Component {
           disabled={this.state.isNoteDisabled}
           autoFocus
         />
+      </div>
         <ControlButtons
           textState={this.state}
-          history={this.props.history}
+          history={history}
           handleNoteDisabled={this.handleNoteDisabled}
         />
       </div>

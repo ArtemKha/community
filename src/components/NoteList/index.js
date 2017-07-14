@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Navigation from './Navigation'
 import Typography from 'material-ui/Typography'
 import Note from './Note'
+import Button from 'material-ui/Button'
 
 class Notes extends Component {
 
   static propTypes = {
     notes: PropTypes.array.isRequired,
+    showAll: PropTypes.func.isRequired,
   }
 
   filterOutcome(array, query) {
@@ -20,23 +21,19 @@ class Notes extends Component {
   }
 
   render() {
-    const { notes, history } = this.props
-    const query = history.location.search.slice(3)
+    const { notes, filter, showAll } = this.props
 
-    const filteredList = this.filterOutcome(notes, query)
+    const filteredList = this.filterOutcome(notes, filter)
     const NoteList = filteredList.map((note, i) => (
-      <Note note={note} key={note.id} index={i} history={this.props.history}/>
+      <Note note={note} key={note.id} index={i}/>
     ))
-    const noNotesPlaceholer = NoteList.length ? <div></div> :
-      <Typography type="subheading" component="p" style={{padding: '50px'}}>
-        No such notes...
-      </Typography>
+    const noNotesPlaceholer = !filter ? false :
+      <Button onClick={showAll} style={{}}>Click to show all!</Button>
 
     return (
       <div>
-        {NoteList}
         {noNotesPlaceholer}
-        <Navigation history={this.props.history}/>
+        {NoteList}
       </div>
     )
   }

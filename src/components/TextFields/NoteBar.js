@@ -6,6 +6,8 @@ import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
 import AlarmIcon from 'material-ui-icons/Alarm'
+import InfoIcon from 'material-ui-icons/Info'
+import SaveIcon from 'material-ui-icons/Save'
 
 const styleSheet = createStyleSheet('SimpleAppBar', {
   root: {
@@ -19,10 +21,20 @@ const styleSheet = createStyleSheet('SimpleAppBar', {
 
 function SimpleAppBar(props) {
   const { classes, removeNote, isNew } = props
-  let deleteButton = isNew ? <div></div> :
-    <IconButton color="default" aria-label="Delete">
-      <DeleteIcon onClick={removeNote} />
-    </IconButton>
+  let deleteButton = isNew ?
+    <div>
+      <IconButton color="default" aria-label="Save">
+        <SaveIcon />
+      </IconButton>
+    </div> :
+    <div>
+      <IconButton color="default" aria-label="Info">
+        <InfoIcon />
+      </IconButton>
+      <IconButton color="default" aria-label="Delete">
+        <DeleteIcon onClick={removeNote} />
+      </IconButton>
+    </div>
 
   return (
     <div className={classes.root}>

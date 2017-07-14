@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker'
 import NoteList from './containers/NoteList'
 import TextFields from './containers/TextFields'
 import SignUp from './components/SignUp'
+import Navigation from './containers/Navigation'
 import App from './containers/App'
 
 import { createStore } from 'redux'
@@ -22,17 +23,27 @@ const store = createStore(
   window.devToolsExtension && window.devToolsExtension()
 )
 
+const AppStyle = {
+  display: 'flex',
+  'flexDirection': 'row',
+  // flexWrap: 'wrap',
+  // 'justify-content': 'center',
+  // border: '5px solid blue',
+}
+
 ReactDOM.render(
 	<Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={NoteList}/>
-          <Route path="/edit/:id" component={TextFields}/>
-          <Route path="/?q=:search" component={NoteList}/>
-          <Route path="/signup" component={SignUp}/>
-          {/* <Redirect from="/" to="/edit/new" /> */}
-        </Switch>
+        <div style={AppStyle}>
+          <Route exact path="/" component={App}/>
+          <Route path="/edit" component={App}/>
+          <Switch>
+            <Route path="/signup" component={SignUp}/>
+            <Route path="/edit/:id" component={TextFields}/>
+            {/* <Route path="/" component={NoteList}/> */}
+          </Switch>
+        </div>
       </BrowserRouter>
     </MuiThemeProvider>
   </Provider>,

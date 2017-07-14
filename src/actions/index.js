@@ -20,3 +20,16 @@ export const updateNote = note => {
     note
   };
 };
+
+export const selectNote = filter => {
+  return {
+    type: NoteActionTypes.SELECT_NOTE,
+    filter
+  };
+};
+
+export const showAll = () => {
+  return {
+    type: NoteActionTypes.SHOW_ALL
+  };
+};

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
+import { NavLink } from 'react-router-dom'
 
 const styleSheet = createStyleSheet('ListDividers', theme => ({
   root: {
@@ -12,6 +13,8 @@ const styleSheet = createStyleSheet('ListDividers', theme => ({
   },
 }))
 
+const linkStyle = {'textDecoration': 'none'}
+
 function ListDividers(props) {
   const { classes } = props
   const { title, text, id } = props.note
@@ -19,17 +22,14 @@ function ListDividers(props) {
   const showTitle = title.slice(0, 40)
   const showText = text.slice(0, 80) + '...'
 
-  const showEdit = () => {
-    let path = `edit/${id}`
-    props.history.push(path)
-  }
-
   return (
     <List className={classes.root}>
-      <ListItem button onClick={showEdit}>
-        <ListItemText primary={showTitle} secondary={showText} />
-      </ListItem>
+      <NavLink to={`/edit/${id}`} style={linkStyle}>
+        <ListItem button>
+          <ListItemText primary={showTitle} secondary={showText} />
+        </ListItem>
       <Divider light />
+    </NavLink>
     </List>
   )
 }

@@ -5,6 +5,7 @@ import Button from 'material-ui/Button'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import SaveIcon from 'material-ui-icons/Save'
 import ArrowBack from 'material-ui-icons/ArrowBack'
+import { NavLink } from 'react-router-dom'
 
 const styleSheet = createStyleSheet('FloatingActionButtons', theme => ({
   main: {
@@ -50,30 +51,25 @@ class FloatingActionButtons extends Component {
     }
   }
 
-  moveToList = () => {
-    this.props.history.push('/')
-  }
-
   render() {
-    const { classes, ownProps } = this.props
+    const { classes } = this.props
     const { isNoteDisabled } = this.props.textState
-    const EditButton = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
+    const ButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
 
     return (
       <div>
         <Button fab color="accent" className={classes.main}
           onClick={this.handleEditButton}>
-          <EditButton/>
+          <ButtonIcon/>
         </Button>
-        <Button fab color="default" className={classes.shifted}
-          onClick={this.moveToList}>
-          <ArrowBack />
-        </Button>
+        <NavLink to={`/`}>
+          <Button fab color="default" className={classes.shifted}>
+            <ArrowBack />
+          </Button>
+        </NavLink>
       </div>
     )
   }
 }
-
-
 
 export default withStyles(styleSheet)(FloatingActionButtons)
