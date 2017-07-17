@@ -37,7 +37,6 @@ function ListDividers(props) {
 ListDividers.propTypes = {
   classes: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
 }
 
 export default withStyles(styleSheet)(ListDividers)

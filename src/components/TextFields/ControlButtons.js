@@ -36,6 +36,7 @@ class FloatingActionButtons extends Component {
     }).isRequired,
     addNote: PropTypes.func.isRequired,
     updateNote: PropTypes.func.isRequired,
+    handleNoteDisabled: PropTypes.func.isRequired,
 
   };
 

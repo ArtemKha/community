@@ -8,11 +8,9 @@ import './css/index.css'
 import './css/App.css'
 
 import registerServiceWorker from './registerServiceWorker'
-import NoteList from './containers/NoteList'
-import TextFields from './containers/TextFields'
 import SignUp from './components/SignUp'
-import Navigation from './containers/Navigation'
-import App from './containers/App'
+import ListView from './components/ListView'
+import NoteView from './components/NoteView'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -23,27 +21,15 @@ const store = createStore(
   window.devToolsExtension && window.devToolsExtension()
 )
 
-const AppStyle = {
-  display: 'flex',
-  'flexDirection': 'row',
-  // flexWrap: 'wrap',
-  // 'justify-content': 'center',
-  // border: '5px solid blue',
-}
-
 ReactDOM.render(
 	<Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
-        <div style={AppStyle}>
-          <Route exact path="/" component={App}/>
-          <Route path="/edit" component={App}/>
           <Switch>
+            <Route exact path="/" component={ListView}/>
             <Route path="/signup" component={SignUp}/>
-            <Route path="/edit/:id" component={TextFields}/>
-            {/* <Route path="/" component={NoteList}/> */}
+            <Route path="/edit/:id" component={NoteView}/>
           </Switch>
-        </div>
       </BrowserRouter>
     </MuiThemeProvider>
   </Provider>,

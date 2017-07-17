@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
 import Note from './Note'
 import Button from 'material-ui/Button'
 
