@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import ControlButtons from '../../containers/ControlButtons'
+import ControlButtons from './ControlButtons'
 import NoteBar from './NoteBar'
-import styled from 'styled-components'
+import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
 const styleSheet = createStyleSheet('TextFields', theme => ({
   input: {
@@ -13,15 +13,6 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
     width: '100%',
   },
 }))
-
-const MainContainer = styled.div`
-  flex-grow: 1;
-`
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`
 
 class TextFields extends Component {
   constructor(props) {
@@ -65,6 +56,11 @@ class TextFields extends Component {
     this.props.history.push('/')
   }
 
+  addNote = (note) => {
+    this.props.addNote(note)
+    this.props.history.push('/')
+  }
+
   handleNoteDisabled = () => {
     const { isNoteDisabled } = this.state
     this.setState({
@@ -72,16 +68,27 @@ class TextFields extends Component {
     })
   }
 
+  handleEditButton = () => {
+    const { note, isNoteDisabled, isNew } = this.state
+    this.handleNoteDisabled()
+
+    if (!isNoteDisabled && isNew === false) {
+      this.props.updateNote(note)
+    } else if (isNew === true) {
+      this.addNote(note)
+    }
+  }
+
   render() {
     const { classes, history, match, notes } = this.props
     let { note, isNoteDisabled, isNew } = this.state
     let { title, text } = note
 
-    console.log('from render', this.props.match.params.id)
+    console.log('id from render TF = ', this.props.match.params.id)
 
     return (
-      <MainContainer>
-        <TextContainer>
+      <FlexItem>
+        <FlexBoxWraped>
           <TextField
             id="name"
             label="Title"
@@ -91,7 +98,12 @@ class TextFields extends Component {
             marginForm
             disabled={isNoteDisabled}
           />
-          <NoteBar isNew={isNew} removeNote={this.removeNote}/>
+          <NoteBar
+            isNew={isNew}
+            isNoteDisabled={isNoteDisabled}
+            removeNote={this.removeNote}
+            handleEditButton={this.handleEditButton}
+          />
           <TextField
             id="multiline"
             label="Note"
@@ -105,13 +117,14 @@ class TextFields extends Component {
             disabled={isNoteDisabled}
             autoFocus
           />
-        </TextContainer>
-        <ControlButtons
-          textState={this.state}
-          history={history}
-          handleNoteDisabled={this.handleNoteDisabled}
-        />
-      </MainContainer>
+        </FlexBoxWraped>
+        <DesktopHiddenBox>
+          <ControlButtons
+            isNoteDisabled={isNoteDisabled}
+            handleEditButton={this.handleEditButton}
+          />
+        </DesktopHiddenBox>
+      </FlexItem>
     )
   }
 }

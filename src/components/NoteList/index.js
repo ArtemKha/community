@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Note from './Note'
 import Button from 'material-ui/Button'
+import { NoteListBox } from '../_styledComponents'
 
 class Notes extends Component {
 
@@ -26,14 +27,14 @@ class Notes extends Component {
     const NoteList = filteredList.map((note, i) => (
       <Note note={note} key={note.id} index={i}/>
     ))
-    const noNotesPlaceholer = !filter ? false :
-      <Button onClick={showAll} style={{}}>Click to show all!</Button>
+    const NoNotesPlaceholer = () => !filter ? false :
+      <Button onClick={showAll} style={{width: '100%'}}>Click to show all notes</Button>
 
     return (
-      <div>
-        {noNotesPlaceholer}
+      <NoteListBox>
+        <NoNotesPlaceholer />
         {NoteList}
-      </div>
+      </NoteListBox>
     )
   }
 }

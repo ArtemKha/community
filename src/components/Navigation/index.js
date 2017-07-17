@@ -8,7 +8,6 @@ import MenuIcon from 'material-ui-icons/Menu'
 import AddCircle from 'material-ui-icons/AddCircle'
 import Menu from './Menu'
 import Search from './Search'
-import { NavLink } from 'react-router-dom'
 
 const styleSheet = createStyleSheet('SimpleBottomNavigation', {
   root: {
@@ -32,6 +31,7 @@ class SimpleBottomNavigation extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     selectNote: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   handleMenuDrawer = () => {
@@ -52,18 +52,20 @@ class SimpleBottomNavigation extends Component {
     this.props.selectNote(filter)
   }
 
+  handleNewButton = () => {
+    this.props.history.push('/edit/new')
+  }
+
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
 
     return (
       <div className={classes.root}>
         <BottomNavigation showLabels>
           <BottomNavigationButton label="Search"
             icon={<SearchIcon />} onClick={this.handleSearchDrawer} />
-            <BottomNavigationButton
-              icon={<NavLink to={`/edit/new`}><AddCircle/></NavLink>}
-              label={"New"}
-            />
+            <BottomNavigationButton label={"New"}
+              icon={<AddCircle/>} onClick={this.handleNewButton}/>
           <BottomNavigationButton label="Menu"
             icon={<MenuIcon />} onClick={this.handleMenuDrawer}/>
         </BottomNavigation>

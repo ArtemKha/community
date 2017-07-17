@@ -28,39 +28,18 @@ class FloatingActionButtons extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    textState: PropTypes.shape({
-      note: PropTypes.object.isRequired,
-      isNew: PropTypes.bool.isRequired,
-      isNoteDisabled: PropTypes.bool.isRequired,
-    }).isRequired,
-    addNote: PropTypes.func.isRequired,
-    updateNote: PropTypes.func.isRequired,
-    handleNoteDisabled: PropTypes.func.isRequired,
-
+    handleEditButton: PropTypes.func.isRequired,
   };
-
-  handleEditButton = () => {
-    const { note, isNoteDisabled, isNew } = this.props.textState
-    this.props.handleNoteDisabled()
-
-    if (!isNoteDisabled && isNew === false) {
-      this.props.updateNote(note)
-    } else if (isNew === true) {
-      this.props.addNote(note)
-      this.props.history.push('/')
-    }
-  }
 
   render() {
     const { classes } = this.props
-    const { isNoteDisabled } = this.props.textState
+    const { isNoteDisabled, handleEditButton } = this.props
     const ButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
 
     return (
       <div>
         <Button fab color="accent" className={classes.main}
-          onClick={this.handleEditButton}>
+          onClick={handleEditButton}>
           <ButtonIcon/>
         </Button>
         <NavLink to={`/`}>
