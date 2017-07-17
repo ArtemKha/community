@@ -28,7 +28,7 @@ class Notes extends Component {
       <Note note={note} key={note.id} index={i}/>
     ))
     const NoNotesPlaceholer = () => !filter ? false :
-      <Button onClick={showAll} style={{width: '100%'}}>Click to show all notes</Button>
+      <Button onClick={showAll}>Click to show all notes</Button>
 
     return (
       <NoteListBox>

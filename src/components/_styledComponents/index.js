@@ -26,5 +26,22 @@ export const DesktopHiddenBox = styled.div`
 `
 
 export const NoteListBox = styled.div`
-  padding-bottom: 60px;
+  min-width: 360px;
+  overflow: scroll;
+  height: calc(100vh - 56px);
+  margin-bottom: 56px;
+
+  ::-webkit-scrollbar-track {
+	  background-color: #F5F5F5;
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+	  background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: lightgrey;
+  }
 `

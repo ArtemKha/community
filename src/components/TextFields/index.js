@@ -17,18 +17,41 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
 class TextFields extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      note: {},
+      isNew: undefined,
+      isNoteDisabled: undefined,
+    }
+  }
 
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    notes: PropTypes.array.isRequired,
+    removeNote: PropTypes.func.isRequired,
+  }
+
+  componentWillMount() {
+    this.updateTextFields(this.props.match.params.id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextId = nextProps.match.params.id;
+    if(this.props.match.params.id !== nextId) {
+      this.updateTextFields(nextId)
+    }
+  }
+
+  updateTextFields(id) {
+    const notes = this.props.notes
     let note, noteIndex, isNew, isNoteDisabled
-    const { notes, match } = this.props
 
-    //check for adding or editing
-    if (match.params.id === 'new') {
+    if (id === 'new') {
       noteIndex = notes.length
       note = { id: this.idGenerator(notes), title: '', text: '' }
       isNew = true
       isNoteDisabled = false
     } else {
-      noteIndex = notes.findIndex((note) => note.id === match.params.id)
+      noteIndex = notes.findIndex((note) => note.id === id)
       note = notes[noteIndex]
       isNew = false
       isNoteDisabled = true
@@ -39,12 +62,6 @@ class TextFields extends Component {
       isNew: isNew,
       isNoteDisabled: isNoteDisabled,
     }
-  }
-
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    notes: PropTypes.array.isRequired,
-    removeNote: PropTypes.func.isRequired,
   }
 
   idGenerator (array) {
@@ -81,10 +98,7 @@ class TextFields extends Component {
 
   render() {
     const { classes, history, match, notes } = this.props
-    let { note, isNoteDisabled, isNew } = this.state
-    let { title, text } = note
-
-    console.log('id from render TF = ', this.props.match.params.id)
+    const { note, isNoteDisabled, isNew } = this.state
 
     return (
       <FlexItem>
@@ -93,7 +107,7 @@ class TextFields extends Component {
             id="name"
             label="Title"
             className={classes.input}
-            defaultValue={title}
+            value={note.title}
             onChange={e => this.setState({note: { ...note, title: e.target.value}})}
             marginForm
             disabled={isNoteDisabled}
@@ -109,7 +123,7 @@ class TextFields extends Component {
             label="Note"
             className={classes.input}
             rows="4"
-            defaultValue={text}
+            value={note.text}
             onChange={e => this.setState({note: { ...note, text: e.target.value}})}
             multiline
             rowsMax="20"
