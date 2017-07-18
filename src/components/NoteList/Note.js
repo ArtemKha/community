@@ -8,14 +8,13 @@ import { NavLink } from 'react-router-dom'
 const styleSheet = createStyleSheet('ListDividers', theme => ({
   root: {
     width: '100%',
-    maxWidth: '360px',
     background: theme.palette.background.paper,
   },
 }))
 
 const linkStyle = {'textDecoration': 'none'}
 
-function ListDividers(props) {
+const ListDividers = props => {
   const { classes } = props
   const { title, text, id } = props.note
 
@@ -28,7 +27,6 @@ function ListDividers(props) {
         <ListItem button>
           <ListItemText primary={showTitle} secondary={showText} />
         </ListItem>
-      <Divider light />
     </NavLink>
     </List>
   )

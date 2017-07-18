@@ -4,13 +4,16 @@ import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
+import { AlignedRightBox } from '../_styledComponents'
+import { NavLink } from 'react-router-dom'
+
+//icons
 import DeleteIcon from 'material-ui-icons/Delete'
 import AlarmIcon from 'material-ui-icons/Alarm'
 import InfoIcon from 'material-ui-icons/Info'
 import SaveIcon from 'material-ui-icons/Save'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowBack from 'material-ui-icons/ArrowBack'
-import { MobileHiddenBox } from '../_styledComponents'
 
 const styleSheet = createStyleSheet('SimpleAppBar', {
   root: {
@@ -24,30 +27,37 @@ const styleSheet = createStyleSheet('SimpleAppBar', {
 
 function SimpleAppBar(props) {
   const { classes, removeNote, handleEditButton, isNew, isNoteDisabled } = props
-  const ButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
+  const EditButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
   const DeleteButton = () => isNew ? <div></div> :
-    <div>
-      <IconButton color="default" aria-label="Info">
-        <InfoIcon />
-      </IconButton>
-      <IconButton color="default" aria-label="Delete" onClick={removeNote}>
-        <DeleteIcon />
-      </IconButton>
-    </div>
+    <IconButton color="default" aria-label="Delete" onClick={removeNote}>
+      <DeleteIcon />
+    </IconButton>
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="inherit" className={classes.bar}>
         <Toolbar>
-          <IconButton color="default" aria-label="Menu">
-            <AlarmIcon />
-          </IconButton>
-          <DeleteButton />
-          <MobileHiddenBox>
-            <IconButton color="default" aria-label="Delete" onClick={handleEditButton}>
-              <ButtonIcon />
+
+          <NavLink to={`/`}>
+            <IconButton color="default" aria-label="Delete">
+              <ArrowBack />
             </IconButton>
-          </MobileHiddenBox>
+          </NavLink>
+
+          <IconButton color="default" aria-label="Delete" onClick={handleEditButton}>
+            <EditButtonIcon />
+          </IconButton>
+
+          <AlignedRightBox>
+            <DeleteButton />
+            <IconButton color="default" aria-label="Menu">
+              <AlarmIcon />
+            </IconButton>
+            <IconButton color="default" aria-label="Info">
+              <InfoIcon />
+            </IconButton>
+          </AlignedRightBox>
+
         </Toolbar>
       </AppBar>
     </div>

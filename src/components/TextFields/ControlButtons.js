@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import EditIcon from 'material-ui-icons/ModeEdit'
-import SaveIcon from 'material-ui-icons/Save'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import { NavLink } from 'react-router-dom'
 
@@ -34,13 +33,11 @@ class FloatingActionButtons extends Component {
   render() {
     const { classes } = this.props
     const { isNoteDisabled, handleEditButton } = this.props
-    const ButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
-
-    return (
+    const Buttons = () => !isNoteDisabled ? <div></div> :
       <div>
         <Button fab color="accent" className={classes.main}
           onClick={handleEditButton}>
-          <ButtonIcon/>
+          <EditIcon />
         </Button>
         <NavLink to={`/`}>
           <Button fab color="default" className={classes.shifted}>
@@ -48,6 +45,9 @@ class FloatingActionButtons extends Component {
           </Button>
         </NavLink>
       </div>
+
+    return (
+      <Buttons />
     )
   }
 }

@@ -35,14 +35,14 @@ class SimpleBottomNavigation extends Component {
   }
 
   handleMenuDrawer = () => {
-    let menu = this.state.menu
+    const menu = this.state.menu
     this.setState({
       menu: !menu
     })
   }
 
   handleSearchDrawer = () => {
-    let search = this.state.search
+    const search = this.state.search
     this.setState({
       search: !search
     })

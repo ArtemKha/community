@@ -8,6 +8,7 @@ class Notes extends Component {
 
   static propTypes = {
     notes: PropTypes.array.isRequired,
+    filter: PropTypes.string.isRequired,
     showAll: PropTypes.func.isRequired,
   }
 
@@ -27,12 +28,14 @@ class Notes extends Component {
     const NoteList = filteredList.map((note, i) => (
       <Note note={note} key={note.id} index={i}/>
     ))
+
+    const NoNotesStyle = {width: '100%'}
     const NoNotesPlaceholer = () => !filter ? false :
-      <Button onClick={showAll}>Click to show all notes</Button>
+      <Button onClick={showAll} style={NoNotesStyle}>Click to show all notes</Button>
 
     return (
       <NoteListBox>
-        <NoNotesPlaceholer />
+        <NoNotesPlaceholer/>
         {NoteList}
       </NoteListBox>
     )

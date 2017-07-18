@@ -31,36 +31,36 @@ const styleSheet = createStyleSheet('SimpleAppBar', {
   }
 })
 
-function SimpleAppBar(props) {
+const  SimpleAppBar = props => {
   const classes = props.classes
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
-      <AppBar position="static" color="default">
-        <Toolbar className={classes.container}>
-          <Typography type="title" color="inherit">
-            Sign Up
-          </Typography>
-            <TextField
-            id="name"
-            label="Login"
-            className={classes.input}
-            onChange={event => this.setState({ name: event.target.value })}
-            marginForm
-            />
-            <TextField
-             id="password"
-             label="Password"
-             className={classes.input}
-             type="password"
-             marginForm
-           />
-          <Button raised color="primary" className={classes.button}>
-            Sign Up
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+        <AppBar position="static" color="default">
+          <Toolbar className={classes.container}>
+            <Typography type="title" color="inherit">
+              Sign Up
+            </Typography>
+              <TextField
+              id="name"
+              label="Login"
+              className={classes.input}
+              onChange={event => this.setState({ name: event.target.value })}
+              marginForm
+              />
+              <TextField
+               id="password"
+               label="Password"
+               className={classes.input}
+               type="password"
+               marginForm
+             />
+            <Button raised color="primary" className={classes.button}>
+              Sign Up
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
     </div>
   )
 }

@@ -4,8 +4,8 @@ import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
+import { AnimatedBox } from './_styledComponents'
 
 const styleSheet = createStyleSheet('Greeting', {
   button: {
@@ -19,15 +19,16 @@ const styleSheet = createStyleSheet('Greeting', {
   }
 })
 
-function Greeting(props) {
+const Greeting = props =>  {
   const { classes, history } = props
 
-  function addNew() {
+  const addNew = () => {
     history.push('/edit/new')
   }
 
   return (
     <div className={classes.paper}>
+      <AnimatedBox>
       <AppBar position="static" color="default">
         <Toolbar className={classes.container}>
           <Typography type="subheading" color="inherit">
@@ -38,6 +39,7 @@ function Greeting(props) {
           </Button>
         </Toolbar>
       </AppBar>
+    </AnimatedBox>
     </div>
   )
 }

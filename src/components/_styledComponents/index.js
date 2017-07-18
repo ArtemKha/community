@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const FlexBox = styled.div`
   display: flex;
@@ -28,8 +28,12 @@ export const DesktopHiddenBox = styled.div`
 export const NoteListBox = styled.div`
   min-width: 360px;
   overflow: scroll;
-  height: calc(100vh - 56px);
-  margin-bottom: 56px;
+  height: calc(100vh - 36px);
+  margin-bottom: 36px;
+
+  @media (min-width: 600px) {
+    max-width: 360px;
+	}
 
   ::-webkit-scrollbar-track {
 	  background-color: #F5F5F5;
@@ -42,6 +46,19 @@ export const NoteListBox = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: lightgrey;
+    background-color: #d3d3d3;
   }
+`
+const floating = keyframes`
+  from { transform: rotateY(-15deg); }
+  50% { transform: rotateY(15deg) rotateX(20deg); }
+  to { transform: rotateY(-15deg); }
+`
+
+export const AnimatedBox = styled.div`
+  animation: ${floating} 15s infinite;
+`
+
+export const AlignedRightBox = styled.div`
+  margin-left: auto;
 `

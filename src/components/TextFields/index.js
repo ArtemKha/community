@@ -28,6 +28,8 @@ class TextFields extends Component {
     classes: PropTypes.object.isRequired,
     notes: PropTypes.array.isRequired,
     removeNote: PropTypes.func.isRequired,
+    addNote: PropTypes.func.isRequired,
+    updateNote: PropTypes.func.isRequired,
   }
 
   componentWillMount() {
@@ -97,7 +99,7 @@ class TextFields extends Component {
   }
 
   render() {
-    const { classes, history, match, notes } = this.props
+    const { classes } = this.props
     const { note, isNoteDisabled, isNew } = this.state
 
     return (
@@ -122,7 +124,7 @@ class TextFields extends Component {
             id="multiline"
             label="Note"
             className={classes.input}
-            rows="4"
+            rows="6"
             value={note.text}
             onChange={e => this.setState({note: { ...note, text: e.target.value}})}
             multiline
