@@ -27,7 +27,7 @@ export const DesktopHiddenBox = styled.div`
 
 export const NoteListBox = styled.div`
   min-width: 360px;
-  overflow: scroll;
+  overflow-x: scroll;
   height: calc(100vh - 36px);
   margin-bottom: 36px;
 

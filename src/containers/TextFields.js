@@ -3,10 +3,9 @@ import { addNote, removeNote, updateNote } from '../actions'
 
 import TextFields from '../components/TextFields'
 
-
 function mapStateToProps(state) {
   return {
-    notes: state.NoteList
+    notes: state.Notes
   }
 }
 

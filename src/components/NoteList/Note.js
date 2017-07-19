@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import Divider from 'material-ui/Divider'
 import { NavLink } from 'react-router-dom'
 
 const styleSheet = createStyleSheet('ListDividers', theme => ({
   root: {
     width: '100%',
     background: theme.palette.background.paper,
+    overflow: 'hidden',
   },
 }))
 

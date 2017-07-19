@@ -12,7 +12,7 @@ class ListView extends Component {
         <MobileHiddenBox>
           <Greeting history={this.props.history}/>
         </MobileHiddenBox>
-        <Navigation history={this.props.history}/>
+        <Navigation />
       </FlexBox>
     );
   }

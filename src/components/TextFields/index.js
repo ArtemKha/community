@@ -44,19 +44,24 @@ class TextFields extends Component {
   }
 
   updateTextFields(id) {
-    const notes = this.props.notes
-    let note, noteIndex, isNew, isNoteDisabled
+    let notes = this.props.notes
+    let note, noteIndex
+    let isNew = true
+    let isNoteDisabled = false
 
-    if (id === 'new') {
+    if (id === 'new' && notes.length) {
       noteIndex = notes.length
       note = { id: this.idGenerator(notes), title: '', text: '' }
-      isNew = true
-      isNoteDisabled = false
-    } else {
+    } else if (id === 'new' && notes.length < 1) {
+      noteIndex = 0
+      note = { id: '001', title: '', text: '' }
+    } else if (notes.findIndex((note) => note.id === id) !== -1) {
       noteIndex = notes.findIndex((note) => note.id === id)
       note = notes[noteIndex]
       isNew = false
       isNoteDisabled = true
+    } else {
+      this.props.history.push('/404')
     }
 
     this.state = {

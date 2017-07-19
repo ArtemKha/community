@@ -9,15 +9,15 @@ class NoteView extends Component {
   render() {
     return (
       <div>
-        <MobileHiddenBox>
-          <Navigation history={this.props.history}/>
-        </MobileHiddenBox>
         <FlexBox>
           <MobileHiddenBox>
             <NoteList />
           </MobileHiddenBox>
           <Route path="/edit/:id" component={TextFields}/>
         </FlexBox>
+        <MobileHiddenBox>
+          <Navigation />
+        </MobileHiddenBox>
       </div>
     );
   }

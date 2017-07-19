@@ -11,7 +11,7 @@ import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
-const styleSheet = createStyleSheet('SignUp', {
+const styleSheet = createStyleSheet('SignIn', {
   root: {
     'max-width': '90%',
     marginTop: '10%',
@@ -42,7 +42,7 @@ const styleSheet = createStyleSheet('SignUp', {
   }
 })
 
-class SignUp extends Component {
+class SignIn extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -58,9 +58,9 @@ class SignUp extends Component {
     classes: PropTypes.object.isRequired,
   }
 
-  signUp() {
+  signIn() {
     const {email, password} = this.state;
-    fire.auth().createUserWithEmailAndPassword(email, password)
+    fire.auth().signInWithEmailAndPassword(email, password)
       .catch(error => {
         this.setState({error});
       })
@@ -76,7 +76,7 @@ class SignUp extends Component {
           <AppBar position="static" color="default">
             <Toolbar className={classes.container}>
               <Typography type="title" color="inherit">
-                Sign Up
+                Sign In
               </Typography>
                 <TextField
                 id="email"
@@ -101,13 +101,13 @@ class SignUp extends Component {
                   raised
                   color="primary"
                   className={classes.button}
-                  onClick={() => this.signUp()}
+                  onClick={() => this.signIn()}
                 >
-                  Sign Up
+                  Sign In
                 </Button>
                 <Typography type="body1" color="inherit" className={classes.typo}>
-                  Do you have an account? <br />
-                  <Link to={'/signin'} style={linkStyle}>Go to Sign In</Link>
+                  Don't have an account? <br />
+                  <Link to={'/signup'} style={linkStyle}> Create a free account</Link>
                 </Typography>
               </FlexBox>
             </Toolbar>
@@ -118,4 +118,4 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styleSheet)(SignUp)
+export default withStyles(styleSheet)(SignIn)

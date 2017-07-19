@@ -1,7 +1,6 @@
 import * as NoteActionTypes from '../actiontypes'
-import notes from '../notesfile'
 
-export default function NoteList (state = notes, action) {
+export default function Notes (state = [], action) {
   switch(action.type) {
     case NoteActionTypes.ADD_NOTE:
       return [
