@@ -20,8 +20,12 @@ const styleSheet = createStyleSheet('Greeting', {
   }
 })
 
-const NoMatch = props =>  {
-  const { classes, history } = props
+NoMatch.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+}
+
+function NoMatch ({ classes, history })  {
 
   const toHome = () => {
     history.push('/')
@@ -43,10 +47,6 @@ const NoMatch = props =>  {
     </AnimatedBox>
     </div>
   )
-}
-
-NoMatch.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styleSheet)(NoMatch)

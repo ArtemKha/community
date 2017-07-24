@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from '../MaterialUiTheme'
@@ -11,27 +11,24 @@ import ListView from './ListView'
 import NoteView from './NoteView'
 import NoMatch from './NoMatch'
 
-import { fire } from '../firebase'
+import { auth } from '../firebase'
 
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      loggedIn: undefined
+      user: null
     }
   }
 
   componentWillMount() {
-    fire.auth().onAuthStateChanged(user => {
-      user ? this.setState({ loggedIn: true })
-        : this.setState({ loggedIn: false })
-      })
+    auth.onAuthStateChanged(user => {
+      this.setState({ user })
+    })
   }
 
   render() {
-    // console.log(this.state)
-
     return (
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>

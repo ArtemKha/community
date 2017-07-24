@@ -4,9 +4,9 @@ import notes from '../notesfile'
 import { loadState, saveState } from './localStorage'
 
 const configureStore = () => {
-  let persistedState = loadState()
 
   // temporary assert for testing
+  let persistedState = loadState()
   persistedState ?
     persistedState = persistedState.Notes.length ? loadState() : { Notes: notes}
       : persistedState = { Notes: notes}
@@ -25,5 +25,7 @@ const configureStore = () => {
 
   return store
 }
+
+
 
 export default configureStore

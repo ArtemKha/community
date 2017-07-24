@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import ControlButtons from './ControlButtons'
+import Buttons from './Buttons'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
@@ -19,8 +19,8 @@ class TextFields extends Component {
     super(props)
     this.state = {
       note: {},
-      isNew: undefined,
-      isNoteDisabled: undefined,
+      isNew: null,
+      isNoteDisabled: null,
     }
   }
 
@@ -86,10 +86,9 @@ class TextFields extends Component {
   }
 
   handleNoteDisabled = () => {
-    const { isNoteDisabled } = this.state
-    this.setState({
-      isNoteDisabled: !isNoteDisabled
-    })
+    this.setState(prevState => ({
+      isNoteDisabled: !prevState.isNoteDisabled
+    }))
   }
 
   handleEditButton = () => {
@@ -103,19 +102,25 @@ class TextFields extends Component {
     }
   }
 
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   render() {
-    const { classes } = this.props
+    const classes = this.props.classes
     const { note, isNoteDisabled, isNew } = this.state
 
     return (
       <FlexItem>
         <FlexBoxWraped>
           <TextField
-            id="name"
+            name="title"
             label="Title"
             className={classes.input}
             value={note.title}
-            onChange={e => this.setState({note: { ...note, title: e.target.value}})}
+            onChange={this.handleInputChange}
             marginForm
             disabled={isNoteDisabled}
           />
@@ -126,12 +131,12 @@ class TextFields extends Component {
             handleEditButton={this.handleEditButton}
           />
           <TextField
-            id="multiline"
+            name="text"
             label="Note"
             className={classes.input}
             rows="6"
             value={note.text}
-            onChange={e => this.setState({note: { ...note, text: e.target.value}})}
+            onChange={this.handleInputChange}
             multiline
             rowsMax="20"
             marginForm
@@ -140,7 +145,7 @@ class TextFields extends Component {
           />
         </FlexBoxWraped>
         <DesktopHiddenBox>
-          <ControlButtons
+          <Buttons
             isNoteDisabled={isNoteDisabled}
             handleEditButton={this.handleEditButton}
           />

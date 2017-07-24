@@ -1,21 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import NoteList from '../containers/NoteList'
 import Navigation from '../containers/Navigation'
 import Greeting from './Greeting'
 import { FlexBox, MobileHiddenBox } from './_styledComponents'
 
-class ListView extends Component {
-  render() {
-    return (
-      <FlexBox>
-        <NoteList />
-        <MobileHiddenBox>
-          <Greeting history={this.props.history}/>
-        </MobileHiddenBox>
-        <Navigation />
-      </FlexBox>
-    );
-  }
+function ListView({ history }) {
+  return (
+    <FlexBox>
+      <NoteList />
+      <MobileHiddenBox>
+        <Greeting history={history}/>
+      </MobileHiddenBox>
+      <Navigation />
+    </FlexBox>
+  );
 }
 
-export default ListView;
+export default ListView

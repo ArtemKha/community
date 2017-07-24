@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { fire } from '../firebase';
-import { Link } from 'react-router-dom';
-import { FlexBox } from './_styledComponents'
+import { auth } from '../firebase'
+import { Link } from 'react-router-dom'
+import { FlexBox, linkStyle } from './_styledComponents'
 
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -44,7 +44,7 @@ const styleSheet = createStyleSheet('SignUp', {
 
 class SignUp extends Component {
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       email: '',
       password: '',
@@ -58,17 +58,22 @@ class SignUp extends Component {
     classes: PropTypes.object.isRequired,
   }
 
-  signUp() {
-    const {email, password} = this.state;
-    fire.auth().createUserWithEmailAndPassword(email, password)
+  signUp = () => {
+    const {email, password} = this.state
+    auth.createUserWithEmailAndPassword(email, password)
       .catch(error => {
-        this.setState({error});
+        this.setState({error})
       })
+  }
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   render() {
     const classes = this.props.classes
-    const linkStyle = {textDecoration: 'none'}
 
     return (
       <div className={classes.root}>
@@ -79,17 +84,17 @@ class SignUp extends Component {
                 Sign Up
               </Typography>
                 <TextField
-                id="email"
+                name="email"
                 label="E-mail"
                 className={classes.input}
-                onChange={e => this.setState({ email: e.target.value })}
+                onChange={this.handleInputChange}
                 marginForm
                 />
                 <TextField
-                 id="password"
+                 name="password"
                  label="Password"
                  className={classes.input}
-                 onChange={e => this.setState({ password: e.target.value})}
+                 onChange={this.handleInputChange}
                  type="password"
                  marginForm
                />
@@ -101,13 +106,13 @@ class SignUp extends Component {
                   raised
                   color="primary"
                   className={classes.button}
-                  onClick={() => this.signUp()}
+                  onClick={this.signUp}
                 >
                   Sign Up
                 </Button>
                 <Typography type="body1" color="inherit" className={classes.typo}>
                   Do you have an account? <br />
-                  <Link to={'/signin'} style={linkStyle}>Go to Sign In</Link>
+                  <Link to={'/signin'} style={linkStyle}>Sign In</Link>
                 </Typography>
               </FlexBox>
             </Toolbar>

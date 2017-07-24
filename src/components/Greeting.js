@@ -19,8 +19,12 @@ const styleSheet = createStyleSheet('Greeting', {
   }
 })
 
-const Greeting = props =>  {
-  const { classes, history } = props
+Greeting.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+}
+
+function Greeting({ classes, history }) {
 
   const addNew = () => {
     history.push('/edit/new')
@@ -42,10 +46,6 @@ const Greeting = props =>  {
     </AnimatedBox>
     </div>
   )
-}
-
-Greeting.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styleSheet)(Greeting)

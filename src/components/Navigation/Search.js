@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -14,31 +14,28 @@ const styleSheet = createStyleSheet('Search',theme => ({
   },
 }))
 
-class Search extends Component {
+Search.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleSearchDrawer: PropTypes.func.isRequired,
+  search: PropTypes.bool.isRequired,
+}
 
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    handleSearchDrawer: PropTypes.func.isRequired,
-    search: PropTypes.bool.isRequired,
-  }
-
-  render() {
-    const {classes, search, handleSearchDrawer, handleSearchInput} = this.props
-
-    return (
-      <div>
-        <Drawer
-          anchor="bottom"
-          open={search}
-          onRequestClose={handleSearchDrawer}
-          onClick={handleSearchDrawer}
-        >
-          <Input placeholder="Search" autoFocus className={classes.input}
-            onChange={e => handleSearchInput(e.target.value)} />
-        </Drawer>
-      </div>
-    )
-  }
+function Search({classes, search, handleSearchDrawer, handleSearchInput}) {
+  return (
+    <Drawer
+      anchor="bottom"
+      open={search}
+      onRequestClose={handleSearchDrawer}
+      onClick={handleSearchDrawer}
+    >
+      <Input
+        placeholder="Search"
+        autoFocus
+        className={classes.input}
+        onChange={e => handleSearchInput(e.target.value)}
+      />
+    </Drawer>
+  )
 }
 
 export default withStyles(styleSheet)(Search)

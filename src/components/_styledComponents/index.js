@@ -62,3 +62,4 @@ export const AnimatedBox = styled.div`
 export const AlignedRightBox = styled.div`
   margin-left: auto;
 `
+export const linkStyle = {textDecoration: 'none', color: '#7b1fa2'}

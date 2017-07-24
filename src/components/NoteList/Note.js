@@ -4,7 +4,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 import { NavLink } from 'react-router-dom'
 
-const styleSheet = createStyleSheet('ListDividers', theme => ({
+const styleSheet = createStyleSheet('Note', theme => ({
   root: {
     width: '100%',
     background: theme.palette.background.paper,
@@ -12,14 +12,18 @@ const styleSheet = createStyleSheet('ListDividers', theme => ({
   },
 }))
 
-const linkStyle = {'textDecoration': 'none'}
+Note.propTypes = {
+  classes: PropTypes.object.isRequired,
+  note: PropTypes.object.isRequired,
+}
 
-const ListDividers = props => {
-  const { classes } = props
-  const { title, text, id } = props.note
+function Note({ classes, note }) {
+  let { title, text, id } = note
 
+  if (title === '') title = text.slice(0, 40)
   const showTitle = title.slice(0, 40)
   const showText = text.slice(0, 80) + '...'
+  const linkStyle = {'textDecoration': 'none'}
 
   return (
     <List className={classes.root}>
@@ -32,9 +36,4 @@ const ListDividers = props => {
   )
 }
 
-ListDividers.propTypes = {
-  classes: PropTypes.object.isRequired,
-  note: PropTypes.object.isRequired,
-}
-
-export default withStyles(styleSheet)(ListDividers)
+export default withStyles(styleSheet)(Note)

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import { auth } from '../../firebase'
+
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
@@ -8,6 +11,7 @@ import InboxIcon from 'material-ui-icons/Inbox'
 import StarIcon from 'material-ui-icons/Star'
 import DeleteIcon from 'material-ui-icons/Delete'
 import ReportIcon from 'material-ui-icons/Report'
+import OutIcon from 'material-ui-icons/SystemUpdateAlt'
 
 const styleSheet = createStyleSheet('Menu', {
   listFull: {
@@ -44,6 +48,12 @@ class Menu extends Component {
             <StarIcon />
           </ListItemIcon>
           <ListItemText primary="Starred" />
+        </ListItem>
+        <ListItem button onClick={() => auth.signOut()}>
+          <ListItemIcon>
+            <OutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign Out" />
         </ListItem>
       </div>
     )

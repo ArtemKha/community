@@ -9,13 +9,13 @@ import { NavLink } from 'react-router-dom'
 
 //icons
 import DeleteIcon from 'material-ui-icons/Delete'
-import AlarmIcon from 'material-ui-icons/Alarm'
+import NotificationIcon from 'material-ui-icons/Notifications'
 import InfoIcon from 'material-ui-icons/Info'
 import SaveIcon from 'material-ui-icons/Save'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 
-const styleSheet = createStyleSheet('SimpleAppBar', {
+const styleSheet = createStyleSheet('NoteBar', {
   root: {
     marginTop: 30,
     width: '100%',
@@ -25,8 +25,16 @@ const styleSheet = createStyleSheet('SimpleAppBar', {
   }
 })
 
-function SimpleAppBar(props) {
-  const { classes, removeNote, handleEditButton, isNew, isNoteDisabled } = props
+NoteBar.propTypes = {
+  isNew: PropTypes.bool.isRequired,
+  isNoteDisabled: PropTypes.bool.isRequired,
+  handleEditButton: PropTypes.func.isRequired,
+  removeNote: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+}
+
+function NoteBar({ classes, removeNote, handleEditButton, isNew, isNoteDisabled }) {
+
   const EditButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
   const DeleteButton = () => isNew ? <div></div> :
     <IconButton color="default" aria-label="Delete" onClick={removeNote}>
@@ -51,7 +59,7 @@ function SimpleAppBar(props) {
           <AlignedRightBox>
             <DeleteButton />
             <IconButton color="default" aria-label="Menu">
-              <AlarmIcon />
+              <NotificationIcon />
             </IconButton>
             <IconButton color="default" aria-label="Info">
               <InfoIcon />
@@ -64,12 +72,4 @@ function SimpleAppBar(props) {
   )
 }
 
-SimpleAppBar.propTypes = {
-  isNew: PropTypes.bool.isRequired,
-  isNoteDisabled: PropTypes.bool.isRequired,
-  handleEditButton: PropTypes.func.isRequired,
-  removeNote: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-}
-
-export default withStyles(styleSheet)(SimpleAppBar)
+export default withStyles(styleSheet)(NoteBar)

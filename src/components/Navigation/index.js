@@ -21,7 +21,6 @@ const styleSheet = createStyleSheet('SimpleBottomNavigation', {
 class SimpleBottomNavigation extends Component {
   constructor(){
     super()
-
     this.state = {
       menu: false,
       search: false,

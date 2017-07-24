@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { addNote, removeNote, updateNote } from '../actions'
+import { withRouter } from 'react-router'
 
 import TextFields from '../components/TextFields'
 
@@ -17,4 +18,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextFields)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TextFields))
