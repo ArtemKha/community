@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet('NoteBar', {
     width: '100%',
   },
   bar: {
-    'box-shadow': 'none',
+    boxShadow: 'none',
   }
 })
 
@@ -36,7 +36,7 @@ NoteBar.propTypes = {
 function NoteBar({ classes, removeNote, handleEditButton, isNew, isNoteDisabled }) {
 
   const EditButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
-  const DeleteButton = () => isNew ? <div></div> :
+  const DeleteButton = () => !isNew &&
     <IconButton color="default" aria-label="Delete" onClick={removeNote}>
       <DeleteIcon />
     </IconButton>
@@ -45,14 +45,16 @@ function NoteBar({ classes, removeNote, handleEditButton, isNew, isNoteDisabled 
     <div className={classes.root}>
       <AppBar position="static" color="inherit" className={classes.bar}>
         <Toolbar>
-
           <NavLink to={`/`}>
             <IconButton color="default" aria-label="Delete">
               <ArrowBack />
             </IconButton>
           </NavLink>
 
-          <IconButton color="default" aria-label="Delete" onClick={handleEditButton}>
+          <IconButton
+            color="default"
+            aria-label="Delete"
+            onClick={handleEditButton}>
             <EditButtonIcon />
           </IconButton>
 

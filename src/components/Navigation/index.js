@@ -9,7 +9,7 @@ import AddCircle from 'material-ui-icons/AddCircle'
 import Menu from './Menu'
 import Search from './Search'
 
-const styleSheet = createStyleSheet('SimpleBottomNavigation', {
+const styleSheet = createStyleSheet('ListDividers', {
   root: {
     width: '100%',
     position: 'fixed',
@@ -18,7 +18,7 @@ const styleSheet = createStyleSheet('SimpleBottomNavigation', {
   },
 })
 
-class SimpleBottomNavigation extends Component {
+class Navigation extends Component {
   constructor(){
     super()
     this.state = {
@@ -52,26 +52,34 @@ class SimpleBottomNavigation extends Component {
   }
 
   handleNewButton = () => {
-    this.props.history.push('/edit/new')
+    this.props.history.push('/note/new')
   }
 
   render() {
-    const { classes } = this.props
+    const classes = this.props.classes
 
     return (
       <div className={classes.root}>
         <BottomNavigation showLabels>
-          <BottomNavigationButton label="Search"
-            icon={<SearchIcon />} onClick={this.handleSearchDrawer} />
-            <BottomNavigationButton label={"New"}
-              icon={<AddCircle/>} onClick={this.handleNewButton}/>
-          <BottomNavigationButton label="Menu"
-            icon={<MenuIcon />} onClick={this.handleMenuDrawer}/>
+          <BottomNavigationButton
+            label="Search"
+            icon={<SearchIcon />}
+            onClick={this.handleSearchDrawer} />
+          <BottomNavigationButton
+            label={"New"}
+            icon={<AddCircle/>}
+            onClick={this.handleNewButton}/>
+          <BottomNavigationButton
+            label="Menu"
+            icon={<MenuIcon />}
+            onClick={this.handleMenuDrawer}/>
         </BottomNavigation>
 
-        <Menu menu={this.state.menu}
+        <Menu
+          menu={this.state.menu}
           handleMenuDrawer={this.handleMenuDrawer}/>
-        <Search search={this.state.search}
+        <Search
+          search={this.state.search}
           handleSearchDrawer={this.handleSearchDrawer}
           handleSearchInput={this.handleSearchInput}/>
       </div>
@@ -79,4 +87,4 @@ class SimpleBottomNavigation extends Component {
   }
 }
 
-export default withStyles(styleSheet)(SimpleBottomNavigation)
+export default withStyles(styleSheet)(Navigation)

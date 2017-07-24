@@ -6,7 +6,7 @@ import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import { NavLink } from 'react-router-dom'
 
-const styleSheet = createStyleSheet('FloatingActionButtons', theme => ({
+const styleSheet = createStyleSheet('Buttons', theme => ({
   main: {
     margin: theme.spacing.unit,
     position: 'fixed',
@@ -30,7 +30,6 @@ Buttons.propTypes = {
 }
 
 function Buttons({ classes, isNoteDisabled, handleEditButton }) {
-  console.log(isNoteDisabled)
   const Buttons = () => isNoteDisabled &&
     <div>
       <Button fab color="accent" className={classes.main}

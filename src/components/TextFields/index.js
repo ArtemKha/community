@@ -37,7 +37,7 @@ class TextFields extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const nextId = nextProps.match.params.id;
+    const nextId = nextProps.match.params.id
     if(this.props.match.params.id !== nextId) {
       this.updateTextFields(nextId)
     }
@@ -80,7 +80,7 @@ class TextFields extends Component {
     this.props.history.push('/')
   }
 
-  addNote = (note) => {
+  addNote = note => {
     this.props.addNote(note)
     this.props.history.push('/')
   }
@@ -95,17 +95,20 @@ class TextFields extends Component {
     const { note, isNoteDisabled, isNew } = this.state
     this.handleNoteDisabled()
 
-    if (!isNoteDisabled && isNew === false) {
+    if (!isNoteDisabled && !isNew) {
       this.props.updateNote(note)
-    } else if (isNew === true) {
+    } else if (isNew) {
       this.addNote(note)
     }
   }
 
   handleInputChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    });
+      note: {
+        ...this.state.note,
+        [e.target.name]: e.target.value
+      }
+    })
   }
 
   render() {

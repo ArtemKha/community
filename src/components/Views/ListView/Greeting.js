@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
-import { AnimatedBox } from './_styledComponents'
+import { AnimatedBox } from '../../_styledComponents'
 
 const styleSheet = createStyleSheet('Greeting', {
   button: {
@@ -27,7 +27,7 @@ Greeting.propTypes = {
 function Greeting({ classes, history }) {
 
   const addNew = () => {
-    history.push('/edit/new')
+    history.push('/note/new')
   }
 
   return (

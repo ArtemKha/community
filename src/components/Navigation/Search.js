@@ -4,7 +4,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Input from 'material-ui/Input/Input'
 
-const styleSheet = createStyleSheet('Search',theme => ({
+const styleSheet = createStyleSheet('Search', theme => ({
   listFull: {
     width: 'auto',
     flex: 'initial',

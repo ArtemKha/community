@@ -7,8 +7,8 @@ import '../css/App.css'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
-import ListView from './ListView'
-import NoteView from './NoteView'
+import ListView from './Views/ListView'
+import NoteView from './Views/NoteView'
 import NoMatch from './NoMatch'
 
 import { auth } from '../firebase'
@@ -34,9 +34,9 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ListView}/>
+            <Route path="/note/:id" component={NoteView}/>
             <Route path="/signup" component={SignUp}/>
             <Route path="/signin" component={SignIn}/>
-            <Route path="/edit/:id" component={NoteView}/>
             <Route path="/404" component={NoMatch}/>
             <Route component={NoMatch}/>
           </Switch>
