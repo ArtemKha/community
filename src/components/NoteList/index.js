@@ -34,7 +34,9 @@ class Notes extends Component {
 
     const NoNotesStyle = {width: '100%'}
     const NoNotesPlaceholer = () => !filter ? false :
-      <Button onClick={showAll} style={NoNotesStyle}>Click to show all notes</Button>
+      <Button onClick={showAll} style={NoNotesStyle}>
+        Click to show all notes
+      </Button>
 
     console.log('query from list')
     return (
