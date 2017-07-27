@@ -1,4 +1,4 @@
-import * as NoteActionTypes from '../actiontypes';
+import * as NoteActionTypes from '../actiontypes/filter';
 
 export default function filterTracks(state = '', action) {
   switch (action.type) {

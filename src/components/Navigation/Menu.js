@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { auth } from '../../firebase'
-
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
@@ -30,6 +28,7 @@ class Menu extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     handleMenuDrawer: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
     menu: PropTypes.bool.isRequired,
   }
 
@@ -49,7 +48,7 @@ class Menu extends Component {
           </ListItemIcon>
           <ListItemText primary="Starred" />
         </ListItem>
-        <ListItem button onClick={() => auth.signOut()}>
+        <ListItem button onClick={this.props.signOut}>
           <ListItemIcon>
             <OutIcon />
           </ListItemIcon>

@@ -27,6 +27,7 @@ export const DesktopHiddenBox = styled.div`
 
 export const NoteListBox = styled.div`
   min-width: 360px;
+  width: 100%;
   overflow-x: scroll;
   height: calc(100vh - 36px);
   margin-bottom: 36px;
@@ -47,6 +48,12 @@ export const NoteListBox = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background-color: #d3d3d3;
+  }
+`
+
+export const NoteListHideMobileBox = styled.div`
+  @media (max-width: 600px) {
+    display: none;
   }
 `
 const floating = keyframes`

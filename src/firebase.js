@@ -14,5 +14,4 @@ firebase.initializeApp(config)
 export default firebase
 export const database = firebase.database()
 export const auth = firebase.auth()
-// const dbRef = db.ref().child('data')
-// export const noteRef = firebase.database().ref('notes')
+export const NotesRef = database.ref('/Notes')

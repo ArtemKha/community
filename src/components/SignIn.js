@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { auth } from '../firebase'
 import { Link } from 'react-router-dom'
 import { FlexBox, linkStyle } from './_styledComponents'
 
@@ -60,21 +59,21 @@ class SignIn extends Component {
 
   signIn = () => {
     const {email, password} = this.state
-    auth.signInWithEmailAndPassword(email, password)
-      .catch(error => {
-        this.setState({error})
-      })
+    this.props.signIn(email, password)
   }
 
   handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    });
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.user && this.props.history.push('/')
   }
 
   render() {
     const classes = this.props.classes
-
     return (
       <div className={classes.root}>
         <div className={classes.paper}>

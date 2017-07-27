@@ -1,20 +1,18 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
 import NoteReducer from '../reducers'
-import notes from '../notesfile'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { loadState, saveState } from './localStorage'
+import { startListenToAuthChanges } from '../actions/auth'
 
 const configureStore = () => {
 
-  // temporary assert for testing
   let persistedState = loadState()
-  persistedState ?
-    persistedState = persistedState.Notes.length ? loadState() : { Notes: notes}
-      : persistedState = { Notes: notes}
 
   const store = createStore(
     NoteReducer,
     persistedState,
-    window.devToolsExtension && window.devToolsExtension()
+    composeWithDevTools(applyMiddleware(thunk))
   )
 
   store.subscribe(() => {
@@ -23,9 +21,9 @@ const configureStore = () => {
     })
   })
 
+  store.dispatch(startListenToAuthChanges())
+
   return store
 }
-
-
 
 export default configureStore

@@ -58,6 +58,10 @@ class SignUp extends Component {
     classes: PropTypes.object.isRequired,
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.user && this.props.history.push('/')
+  }
+
   signUp = () => {
     const {email, password} = this.state
     auth.createUserWithEmailAndPassword(email, password)

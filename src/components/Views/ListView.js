@@ -1,8 +1,8 @@
 import React from 'react'
-import NoteList from '../../../containers/NoteList'
-import Navigation from '../../../containers/Navigation'
-import Greeting from './Greeting'
-import { FlexBox, MobileHiddenBox } from '../../_styledComponents'
+import NoteList from '../../containers/NoteList'
+import Navigation from '../../containers/Navigation'
+import Greeting from '../Greeting'
+import { FlexBox, MobileHiddenBox } from '../_styledComponents'
 
 function ListView({ history }) {
   return (

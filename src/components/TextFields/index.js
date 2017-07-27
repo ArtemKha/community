@@ -98,7 +98,10 @@ class TextFields extends Component {
     if (!isNoteDisabled && !isNew) {
       this.props.updateNote(note)
     } else if (isNew) {
-      this.addNote(note)
+      //if the Title of the note is empty then grab the text
+      note.title
+        ? this.addNote(note)
+        : this.addNote({...note, title: note.text.slice(0, 40)})
     }
   }
 

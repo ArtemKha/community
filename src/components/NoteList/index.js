@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Note from './Note'
 import Button from 'material-ui/Button'
 import { NoteListBox } from '../_styledComponents'
 
-Notes.propTypes = {
-  notes: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
-  showAll: PropTypes.func.isRequired,
-}
+class Notes extends Component {
 
-function Notes({ notes, filter, showAll }) {
+  static propTypes = {
+    notes: PropTypes.array.isRequired,
+    filter: PropTypes.string.isRequired,
+    showAll: PropTypes.func.isRequired,
+  }
 
-  function filterOutcome(array, query) {
+  componentDidMount() {
+    this.props.onGetNotes();
+  }
+
+  filterOutcome(array, query) {
     return array.filter(item => {
       const filter = query.toUpperCase()
       const title = item.title.toUpperCase()
@@ -21,21 +25,25 @@ function Notes({ notes, filter, showAll }) {
     })
   }
 
-  const filteredList = filterOutcome(notes, filter)
-  const NoteList = filteredList.map((note, i) => (
-    <Note note={note} key={note.id} index={i}/>
-  ))
+  render() {
+    const { notes, filter, showAll } = this.props
+    const filteredList = this.filterOutcome(notes, filter)
+    const NoteList = filteredList.map((note, i) => (
+      <Note note={note} key={note.id} index={i}/>
+    ))
 
-  const NoNotesStyle = {width: '100%'}
-  const NoNotesPlaceholer = () => !filter ? false :
-    <Button onClick={showAll} style={NoNotesStyle}>Click to show all notes</Button>
+    const NoNotesStyle = {width: '100%'}
+    const NoNotesPlaceholer = () => !filter ? false :
+      <Button onClick={showAll} style={NoNotesStyle}>Click to show all notes</Button>
 
-  return (
-    <NoteListBox>
-      <NoNotesPlaceholer/>
-      {NoteList}
-    </NoteListBox>
-  )
+    console.log('query from list')
+    return (
+      <NoteListBox>
+        <NoNotesPlaceholer/>
+        {NoteList}
+      </NoteListBox>
+    )
+  }
 }
 
 export default Notes

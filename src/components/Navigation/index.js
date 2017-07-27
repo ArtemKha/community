@@ -30,6 +30,7 @@ class Navigation extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     selectNote: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   }
 
@@ -77,6 +78,7 @@ class Navigation extends Component {
 
         <Menu
           menu={this.state.menu}
+          signOut={this.props.signOut}
           handleMenuDrawer={this.handleMenuDrawer}/>
         <Search
           search={this.state.search}
