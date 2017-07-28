@@ -1,8 +1,9 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-const icon = require('../public/favicon.ico')
 
-exports.newMessageAlert = functions.database.ref('/Users/Notes/{note}')
+admin.initializeApp(functions.config().firebase)
+
+exports.newNoteAlert = functions.database.ref('/Users/Notes/{note}')
   .onWrite((event) => {
     const note = event.data.val()
 
@@ -12,19 +13,20 @@ exports.newMessageAlert = functions.database.ref('/Users/Notes/{note}')
         snapshot.forEach((user) => {
           const token = user.child('token').val()
           if (token) tokens.push(token)
-        }
+        })
         return tokens
       })
 
     const getNote = admin.database().app().ref('Users/Notes').child(note.uid)
-    Promise.all([getTokens, getNote]).them(([ tokens, note ]) => {
+    Promise.all([getTokens, getNote]).then(([ tokens, note ]) => {
       const payload = {
         notification: {
           title: `Reminder from JustNote: ${note.title}`,
-          body: note.test,
-          icon: icon
+          body: note.test
         }
       }
+
+      auth.messaging().sendToDevice(tokens, payload).catch(console.error)
     })
   })
 

@@ -23,7 +23,7 @@ const styleSheet = createStyleSheet('SignUp', {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    'min-height': '250px',
+    height: 'auto',
     padding: 30,
   },
   button: {
@@ -39,7 +39,10 @@ const styleSheet = createStyleSheet('SignUp', {
   typo: {
     marginLeft: '10px',
     marginTop: '10px',
-  }
+  },
+  error: {
+    color: 'tomato',
+  },
 })
 
 class SignUp extends Component {
@@ -101,7 +104,7 @@ class SignUp extends Component {
                  type="password"
                  marginForm
                />
-               <Typography type="body1" color="inherit">
+               <Typography type="body1" className={classes.error}>
                  {this.props.error.message}
                </Typography>
                <FlexBox>
