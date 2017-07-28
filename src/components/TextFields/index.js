@@ -76,7 +76,7 @@ class TextFields extends Component {
   }
 
   removeNote = () => {
-    this.props.removeNote(this.state.note.index)
+    this.props.removeNote(this.state.note.key)
     this.props.history.push('/')
   }
 
@@ -160,6 +160,5 @@ class TextFields extends Component {
     )
   }
 }
-
 
 export default withStyles(styleSheet)(TextFields)

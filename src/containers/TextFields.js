@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addNote, removeNote, updateNote } from '../actions'
+import { addNote, removeNote, updateNote } from '../actions/note'
 import { withRouter } from 'react-router'
 
 import TextFields from '../components/TextFields'

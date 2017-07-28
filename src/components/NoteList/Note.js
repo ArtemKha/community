@@ -20,7 +20,6 @@ Note.propTypes = {
 
 function Note({ classes, note }) {
   let { title, text, id } = note
-
   const showTitle = title.slice(0, 40)
   const showText = text.slice(0, 80) + '...'
 

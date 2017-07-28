@@ -2,25 +2,18 @@ import { createStore, applyMiddleware  } from 'redux'
 import NoteReducer from '../reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { loadState, saveState } from './localStorage'
 import { startListenToAuthChanges } from '../actions/auth'
+import { watchNoteChangedEvent } from '../actions/note'
+// import { getNotes } from '../actions/get_notes'
 
 const configureStore = () => {
-
-  let persistedState = loadState()
-
   const store = createStore(
     NoteReducer,
-    persistedState,
     composeWithDevTools(applyMiddleware(thunk))
   )
 
-  store.subscribe(() => {
-    saveState({
-      Notes: store.getState().Notes
-    })
-  })
-
+  // listen for changes authUser and Notes
+  store.dispatch(watchNoteChangedEvent())
   store.dispatch(startListenToAuthChanges())
 
   return store

@@ -1,3 +1,5 @@
 export const ADD_NOTE = "ADD_NOTE"
 export const EDIT_NOTE = "EDIT_NOTE"
 export const DELETE_NOTE = "DELETE_NOTE"
+export const NOTE_REQUESTED = "NOTE_REQUESTED"
+export const NOTE_REJECTED = "NOTE_REJECTED"

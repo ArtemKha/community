@@ -12,10 +12,6 @@ class Notes extends Component {
     showAll: PropTypes.func.isRequired,
   }
 
-  componentDidMount() {
-    this.props.onGetNotes();
-  }
-
   filterOutcome(array, query) {
     return array.filter(item => {
       const filter = query.toUpperCase()
@@ -38,7 +34,6 @@ class Notes extends Component {
         Click to show all notes
       </Button>
 
-    console.log('query from list')
     return (
       <NoteListBox>
         <NoNotesPlaceholer/>

@@ -7,7 +7,7 @@ export function getNotes() {
     return NotesRef.once('value', snap => {
       let notes = []
       snap.forEach(note => {
-        notes.push(note.val())
+        notes.push({...note.val(), key: note.key})
       })
       dispatch(getNotesFulfilledAction(notes))
     })
@@ -32,7 +32,7 @@ function getNotesRejectedAction() {
 
 function getNotesFulfilledAction(notes) {
   return {
-    type: NotesActionTypes.GET_NOTES_FULFILLED,
+    type: NotesActionTypes.GET_NOTES_RECEIVED,
     notes
   }
 }

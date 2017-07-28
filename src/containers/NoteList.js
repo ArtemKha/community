@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetNotes: () => dispatch(getNotes()),
+    getNotes: () => dispatch(getNotes()),
     showAll: () => dispatch(showAll()),
   }
 }

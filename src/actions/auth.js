@@ -1,12 +1,10 @@
-import * as UserActionTypes from '../actiontypes/user'
+import * as UserActionTypes from '../actiontypes/auth'
 import { auth } from '../firebase'
 
 export function signUp(email, password) {
   return dispatch => {
     dispatch(getdUserRequestedAction())
-    auth.createUserWithEmailAndPassword(email, password).then(user => {
-      dispatch(signedIn(user))
-    })
+    auth.createUserWithEmailAndPassword(email, password)
     .catch((error) => {
       console.log(error)
       dispatch(getUserRejectedAction(error))
@@ -42,20 +40,20 @@ export function startListenToAuthChanges(email, password) {
 
 function getdUserRequestedAction() {
   return {
-    type: UserActionTypes.GET_USER_REQUESTED
+    type: UserActionTypes.USER_REQUESTED
   }
 }
 
 function getUserRejectedAction(error) {
   return {
-    type: UserActionTypes.GET_USER_REJECTED,
+    type: UserActionTypes.USER_REJECTED,
     error
   }
 }
 
 function signedIn(user) {
   return {
-    type: UserActionTypes.GET_USER_FULFILLED,
+    type: UserActionTypes.SIGNED_IN,
     user
   }
 }
