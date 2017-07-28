@@ -55,6 +55,8 @@ class SignIn extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
+    signIn: PropTypes.func.isRequired,
   }
 
   signIn = () => {
@@ -98,7 +100,7 @@ class SignIn extends Component {
                  marginForm
                />
                <Typography type="body1" color="inherit">
-                 {this.state.error.message}
+                 {this.props.error.message}
                </Typography>
                <FlexBox>
                 <Button

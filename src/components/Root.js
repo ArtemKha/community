@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from '../MaterialUiTheme'
 
-import SignUp from './SignUp'
+import SignUp from '../containers/SignUp'
 import SignIn from '../containers/SignIn'
 import ListView from './Views/ListView'
 import NoteView from './Views/NoteView'

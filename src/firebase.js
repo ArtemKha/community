@@ -14,4 +14,5 @@ firebase.initializeApp(config)
 export default firebase
 export const auth = firebase.auth()
 export const database = firebase.database()
+export const messaging = firebase.messaging()
 export const NotesRef = database.ref('/Users')

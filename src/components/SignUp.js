@@ -56,6 +56,8 @@ class SignUp extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
+    signUp: PropTypes.func.isRequired,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,10 +66,7 @@ class SignUp extends Component {
 
   signUp = () => {
     const {email, password} = this.state
-    auth.createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        this.setState({error})
-      })
+    this.props.signUp(email, password)
   }
 
   handleInputChange = (e) => {
@@ -103,7 +102,7 @@ class SignUp extends Component {
                  marginForm
                />
                <Typography type="body1" color="inherit">
-                 {this.state.error.message}
+                 {this.props.error.message}
                </Typography>
                <FlexBox>
                 <Button

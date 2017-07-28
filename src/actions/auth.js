@@ -1,5 +1,6 @@
 import * as UserActionTypes from '../actiontypes/auth'
 import { auth } from '../firebase'
+import registerMessaging from '../request-messaging-permission'
 
 export function signUp(email, password) {
   return dispatch => {
@@ -16,6 +17,10 @@ export function signIn(email, password) {
   return dispatch => {
     dispatch(getdUserRequestedAction())
     auth.signInWithEmailAndPassword(email, password)
+    .catch((error) => {
+      console.log(error)
+      dispatch(getUserRejectedAction(error))
+    })
   }
 }
 
@@ -31,6 +36,7 @@ export function startListenToAuthChanges(email, password) {
     auth.onAuthStateChanged( user => {
       if (user) {
         dispatch(signedIn(user))
+        registerMessaging(user)
       } else {
         dispatch(signedOut())
       }

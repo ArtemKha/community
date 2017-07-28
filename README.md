@@ -1,1 +1,1 @@
-This project was bootstrapped with [Love] (https://github.com/facebookincubator/create-react-app).
+This project was bootstrapped with [Diligence] (https://github.com/facebookincubator/create-react-app).
