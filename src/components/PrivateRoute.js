@@ -7,7 +7,6 @@ PrivateRoute.propTypes = {
 }
 
 export default function PrivateRoute({ user, component: Component, ...rest  }) {
-  console.log(user && user.uid)
   return  (
     <Route {...rest} render={props => (
       Boolean(user) ? (

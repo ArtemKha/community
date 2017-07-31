@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { auth } from '../firebase'
 import { Link } from 'react-router-dom'
 import { FlexBox, linkStyle } from './_styledComponents'
 

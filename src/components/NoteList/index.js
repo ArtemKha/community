@@ -12,7 +12,7 @@ class Notes extends Component {
     showAll: PropTypes.func.isRequired,
   }
 
-  filterOutcome(array, query) {
+  filteredOutcome(array, query) {
     return array.filter(item => {
       const filter = query.toUpperCase()
       const title = item.title.toUpperCase()
@@ -23,9 +23,9 @@ class Notes extends Component {
 
   render() {
     const { notes, filter, showAll } = this.props
-    const filteredList = this.filterOutcome(notes, filter)
+    const filteredList = this.filteredOutcome(notes, filter)
     const NoteList = filteredList.map((note, i) => (
-      <Note note={note} key={note.id} index={i}/>
+      <Note note={note} key={note.key} index={i}/>
     ))
 
     const NoNotesStyle = {width: '100%'}

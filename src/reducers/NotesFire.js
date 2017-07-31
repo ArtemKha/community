@@ -19,17 +19,15 @@ export default function NotesFb(state = [], action) {
       ]
 
     case NoteActionTypes.EDIT_NOTE:
+      const note = state.find(note => { return note.key === action.note.key })
       return [
-        ...state.map(note => {
-          if (note.key === action.note.key){
-            return {
-              ...note,
-              title: action.note.title,
-              text: action.note.text
-            }
-          }
-        return note
-        })
+        ...state.slice(0, action.note.index),
+        {
+          ...note,
+          title: action.note.title,
+          text: action.note.text
+        },
+        ...state.slice(action.note.index + 1)
       ]
     default:
       return state;

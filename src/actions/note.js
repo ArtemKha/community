@@ -1,8 +1,10 @@
 import * as NoteActionTypes from '../actiontypes/note'
 import { NotesRef as UsersRef } from '../firebase'
-let NotesRef = UsersRef.child('/Notes')
-// import { auth } from '../firebase'
-// NotesRef = UsersRef.child(user.uid).child('/Notes')
+let NotesRef = UsersRef.child('/Share/Notes')
+
+export function getUserNotesPath(user) {
+  NotesRef = UsersRef.child(user.uid).child('/Notes')
+}
 
 export function addNote(note) {
   return dispatch => {
@@ -29,7 +31,8 @@ export function updateNote(note) {
   }
 }
 
-export function watchNoteChangedEvent() {
+export function watchNoteChangedEvent(user) {
+  NotesRef = UsersRef.child(user.uid).child('/Notes')
   return dispatch => {
     NotesRef.on('child_added', (snap) => {
       const note = { ...snap.val(), key: snap.key}

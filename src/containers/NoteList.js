@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { showAll } from '../actions/filter'
-import { getNotes } from '../actions/get_notes'
 import NoteList from '../components/NoteList'
 
 
@@ -13,7 +12,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getNotes: () => dispatch(getNotes()),
     showAll: () => dispatch(showAll()),
   }
 }

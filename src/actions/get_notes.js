@@ -1,10 +1,11 @@
 import * as NotesActionTypes from '../actiontypes/notes'
-import { NotesRef } from '../firebase'
+import { NotesRef as UsersRef } from '../firebase'
 
-export function getNotes() {
+export function getNotes(user) {
   return dispatch => {
     dispatch(getNotesRequestedAction())
-    return NotesRef.once('value', snap => {
+    return UsersRef.child(user.uid).child('/Notes')
+      .once('value', snap => {
       let notes = []
       snap.forEach(note => {
         notes.push({...note.val(), key: note.key})

@@ -7,11 +7,12 @@ const config = {
 
 firebase.initializeApp(config)
 const messaging = firebase.messaging()
+
 messaging.setBackgroundMessageHandler((payload) => {
   const title = payload.title
   const options = {
     body: payload.body,
   }
-})
 
-self.registration.showNotification(title, options)
+  self.registration.showNotification(title, options)
+})
