@@ -28,7 +28,7 @@ NoMatch.propTypes = {
 function NoMatch ({ classes, history })  {
 
   const toHome = () => {
-    history.push('/')
+    history.push('/notes')
   }
 
   return (

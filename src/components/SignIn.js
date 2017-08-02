@@ -60,6 +60,7 @@ class SignIn extends Component {
     classes: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     signIn: PropTypes.func.isRequired,
+    user: PropTypes.object,
   }
 
   signIn = () => {
@@ -73,12 +74,17 @@ class SignIn extends Component {
     })
   }
 
+  componentWillMount() {
+    this.props.user && this.props.history.push('/notes')
+  }
+
   componentWillReceiveProps(nextProps) {
-    nextProps.user && this.props.history.push('/')
+    nextProps.user && this.props.history.push('/notes')
   }
 
   render() {
     const classes = this.props.classes
+
     return (
       <div className={classes.root}>
         <div className={classes.paper}>

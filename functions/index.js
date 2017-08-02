@@ -6,7 +6,6 @@ admin.initializeApp(functions.config().firebase)
 exports.newNoteAlert = functions.database.ref('/Users/Notes/')
   .onWrite((event) => {
     const note = event.data.val()
-    console.log('from FB', note)
     const getTokens = admin.database().ref('Users').once('value')
       .then((snapshot) => {
         const tokens = []

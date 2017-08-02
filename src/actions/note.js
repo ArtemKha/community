@@ -1,5 +1,5 @@
 import * as NoteActionTypes from '../actiontypes/note'
-import { NotesRef as UsersRef } from '../firebase'
+import { UsersRef } from '../firebase'
 let NotesRef = UsersRef.child('/Share/Notes')
 
 export function getUserNotesPath(user) {
@@ -9,11 +9,9 @@ export function getUserNotesPath(user) {
 export function addNote(note) {
   return dispatch => {
     dispatch(NoteRequestedAction())
-    NotesRef.push(note)
-    .catch((error) => {
-      console.log(error)
-      dispatch(NoteChangeRejectedAction())
-    })
+    const newRef = NotesRef.push(note)
+    const newNote = { ...note, key: newRef.key }
+    dispatch(addToNotes(newNote))
   }
 }
 
@@ -34,10 +32,6 @@ export function updateNote(note) {
 export function watchNoteChangedEvent(user) {
   NotesRef = UsersRef.child(user.uid).child('/Notes')
   return dispatch => {
-    NotesRef.on('child_added', (snap) => {
-      const note = { ...snap.val(), key: snap.key}
-      dispatch(addToNotes(note))
-    })
 
     NotesRef.on('child_removed', (snap) => {
       dispatch(destroyNote(snap.val().index))
@@ -52,12 +46,6 @@ export function watchNoteChangedEvent(user) {
 function NoteRequestedAction() {
   return {
     type: NoteActionTypes.NOTE_REQUESTED
-  }
-}
-
-function NoteChangeRejectedAction() {
-  return {
-    type: NoteActionTypes.NOTE_REJECTED
   }
 }
 

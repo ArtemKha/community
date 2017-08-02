@@ -60,10 +60,15 @@ class SignUp extends Component {
     classes: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     signUp: PropTypes.func.isRequired,
+    user: PropTypes.object,
+  }
+
+  componentWillMount() {
+    this.props.user && this.props.history.push('/notes')
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.user && this.props.history.push('/')
+    nextProps.user && this.props.history.push('/notes')
   }
 
   signUp = () => {

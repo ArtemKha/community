@@ -25,7 +25,7 @@ function Note({ classes, note }) {
 
   return (
     <List className={classes.root}>
-      <NavLink to={`/note/${id}`} style={linkStyle}>
+      <NavLink to={`/notes/${id}`} style={linkStyle}>
         <ListItem button>
           <ListItemText primary={showTitle} secondary={showText} />
         </ListItem>

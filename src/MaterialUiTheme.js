@@ -1,9 +1,8 @@
-import { createMuiTheme  } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
-import red from 'material-ui/colors/red';
-import 'typeface-roboto';
+import { createMuiTheme  } from 'material-ui/styles'
+import createPalette from 'material-ui/styles/palette'
+import purple from 'material-ui/colors/purple'
+import green from 'material-ui/colors/green'
+import red from 'material-ui/colors/red'
 
 export default createMuiTheme({
   palette: createPalette({
@@ -14,4 +13,4 @@ export default createMuiTheme({
     },
     error: red,
   }),
-});
+})

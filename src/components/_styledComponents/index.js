@@ -8,31 +8,42 @@ export const FlexBoxWraped = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  input:disabled,
+  textarea:disabled {
+    color: rgba(0, 0, 0, 0.9);
+  }
 `
 
 export const FlexItem = styled.div`
   flex-grow: 1;
 `
 
+// desctop/mobile logic for views
 export const MobileHiddenBox = styled.div`
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     display: none;
   }
 `
 export const DesktopHiddenBox = styled.div`
-  @media (min-width: 600px) {
+  @media (min-width: 700px) {
+    display: none;
+  }
+`
+export const NoteListHideMobileBox = styled.div`
+  @media (max-width: 700px) {
     display: none;
   }
 `
 
+// NoteList component
 export const NoteListBox = styled.div`
   min-width: 360px;
   width: 100%;
   overflow-x: scroll;
   height: calc(100vh - 36px);
-  margin-bottom: 36px;
 
-  @media (min-width: 600px) {
+  @media (min-width: 700px) {
     max-width: 360px;
 	}
 
@@ -51,22 +62,22 @@ export const NoteListBox = styled.div`
   }
 `
 
-export const NoteListHideMobileBox = styled.div`
-  @media (max-width: 600px) {
-    display: none;
-  }
-`
+// AnimatedBox keyframe
 const floating = keyframes`
   from { transform: rotateY(-15deg); }
   50% { transform: rotateY(15deg) rotateX(20deg); }
   to { transform: rotateY(-15deg); }
 `
 
+// greeting and 404 components
 export const AnimatedBox = styled.div`
   animation: ${floating} 15s infinite;
 `
 
+// notebar component
 export const AlignedRightBox = styled.div`
   margin-left: auto;
 `
+
+//sign in-out froms
 export const linkStyle = {textDecoration: 'none', color: '#7b1fa2'}

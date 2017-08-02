@@ -1,5 +1,5 @@
 import * as NotesActionTypes from '../actiontypes/notes'
-import { NotesRef as UsersRef } from '../firebase'
+import { UsersRef } from '../firebase'
 
 export function getNotes(user) {
   return dispatch => {

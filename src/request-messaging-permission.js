@@ -4,7 +4,6 @@ export default function(user) {
   messaging.requestPermission()
     .then(() => messaging.getToken())
     .then((token) => {
-      console.log('token', token)
       database.ref('Users')
         .child(user.uid)
         .child('token')

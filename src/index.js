@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
-
-import { Provider } from 'react-redux'
-import configureStore from './store'
 import Root from './components/Root'
-import './App.css'
+import 'typeface-roboto'
+
+import registerServiceWorker from './registerServiceWorker'
+import configureStore from './store'
+import { Provider } from 'react-redux'
 import { messaging } from './firebase'
 
 const store = configureStore()

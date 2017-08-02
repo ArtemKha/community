@@ -5,17 +5,17 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
+import Hidden from 'material-ui/Hidden'
 import { AnimatedBox } from '../_styledComponents'
 
 const styleSheet = createStyleSheet('Greeting', {
   button: {
-    marginLeft: '10px',
     margin: '0 auto',
   },
   paper: {
-    maxWidth: '100%',
     margin: '20px',
-    width: 460,
+    width: '100%',
+    height: 'auto',
   }
 })
 
@@ -27,23 +27,25 @@ Greeting.propTypes = {
 function Greeting({ classes, history }) {
 
   const addNew = () => {
-    history.push('/note/new')
+    history.push('/notes/new')
   }
 
   return (
     <div className={classes.paper}>
       <AnimatedBox>
-      <AppBar position="static" color="default">
-        <Toolbar className={classes.container}>
-          <Typography type="subheading" color="inherit">
-            Click 'New note' to save your great ideas!
-          </Typography>
-          <Button raised color="primary" className={classes.button} onClick={addNew}>
-            New note
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </AnimatedBox>
+        <AppBar position="static" color="default">
+          <Toolbar className={classes.container}>
+            <Hidden smDown>
+              <Typography type="subheading" color="inherit">
+                Click 'New note' to save your great ideas!
+              </Typography>
+            </Hidden>
+            <Button raised color="primary" className={classes.button} onClick={addNew}>
+              New note
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </AnimatedBox>
     </div>
   )
 }

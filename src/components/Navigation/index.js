@@ -53,7 +53,7 @@ class Navigation extends Component {
   }
 
   handleNewButton = () => {
-    this.props.history.push('/note/new')
+    this.props.history.push('/notes/new')
   }
 
   render() {

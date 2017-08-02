@@ -77,12 +77,12 @@ class TextFields extends Component {
 
   removeNote = () => {
     this.props.removeNote(this.state.note.key)
-    this.props.history.push('/')
+    this.props.history.push('/notes')
   }
 
   addNote = note => {
     this.props.addNote(note)
-    this.props.history.push('/')
+    this.props.history.push('/notes')
   }
 
   handleNoteDisabled = () => {

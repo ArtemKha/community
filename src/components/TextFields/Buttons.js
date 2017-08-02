@@ -36,7 +36,7 @@ function Buttons({ classes, isNoteDisabled, handleEditButton }) {
         onClick={handleEditButton}>
         <EditIcon />
       </Button>
-      <NavLink to={`/`}>
+      <NavLink to={`/notes`}>
         <Button fab color="default" className={classes.shifted}>
           <ArrowBack />
         </Button>
