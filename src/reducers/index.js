@@ -3,14 +3,14 @@ import { routerReducer } from 'react-router-redux'
 import Notes from './NotesFire'
 import Filter from './Filter'
 import User from './User'
-import AuthErrors from './AuthErrors'
+import Auth from './Auth'
 
 const NoteReducer = combineReducers({
   routing: routerReducer,
   Notes,
   Filter,
   User,
-  AuthErrors
+  Auth
 })
 
 export default NoteReducer

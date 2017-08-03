@@ -5,7 +5,7 @@ import SignIn from '../components/SignIn'
 function mapStateToProps(state) {
   return {
     user: state.User,
-    error: state.AuthErrors,
+    auth: state.Auth,
   }
 }
 

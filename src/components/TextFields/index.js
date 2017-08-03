@@ -138,10 +138,10 @@ class TextFields extends Component {
           />
           <TextField
             name="text"
-            label="Note"
             className={classes.input}
             rows="6"
             value={note.text}
+            placeholder="What great idea do you have?"
             onChange={this.handleInputChange}
             multiline
             rowsMax="20"

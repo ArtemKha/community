@@ -5,7 +5,7 @@ import SignUp from '../components/SignUp'
 function mapStateToProps(state) {
   return {
     user: state.User,
-    error: state.AuthErrors,
+    auth: state.Auth,
   }
 }
 

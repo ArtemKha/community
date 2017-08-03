@@ -1,18 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Root from './components/Root'
-import 'typeface-roboto'
 
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
 import { Provider } from 'react-redux'
 import { messaging } from './firebase'
 
+import { MuiThemeProvider } from 'material-ui/styles'
+import theme from './MaterialUiTheme'
+import Root from './components/Root'
+import 'typeface-roboto'
+
 const store = configureStore()
 
 ReactDOM.render(
 	<Provider store={store}>
-    <Root/>
+		<MuiThemeProvider theme={theme}>
+			<Root/>
+		</MuiThemeProvider>
   </Provider>,
 	document.getElementById('root')
 )

@@ -1,9 +1,11 @@
 import styled, { keyframes } from 'styled-components'
 
 export const FlexBox = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
 `
+
 export const FlexBoxWraped = styled.div`
   display: flex;
   flex-direction: row;
@@ -25,6 +27,15 @@ export const MobileHiddenBox = styled.div`
     display: none;
   }
 `
+export const MobileHiddenNoteView = styled.div`
+  @media (max-width: 700px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) and (orientation: landscape) {
+    display: none;
+  }
+`
 export const DesktopHiddenBox = styled.div`
   @media (min-width: 700px) {
     display: none;
@@ -38,13 +49,13 @@ export const NoteListHideMobileBox = styled.div`
 
 // NoteList component
 export const NoteListBox = styled.div`
-  min-width: 360px;
+  min-width: 300px;
   width: 100%;
   overflow-x: scroll;
   height: calc(100vh - 36px);
 
   @media (min-width: 700px) {
-    max-width: 360px;
+    width: 360px;
 	}
 
   ::-webkit-scrollbar-track {

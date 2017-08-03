@@ -58,7 +58,7 @@ class SignUp extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    error: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     signUp: PropTypes.func.isRequired,
     user: PropTypes.object,
   }
@@ -84,6 +84,7 @@ class SignUp extends Component {
 
   render() {
     const classes = this.props.classes
+    const signing = this.props.auth.signing
 
     return (
       <div className={classes.root}>
@@ -109,7 +110,7 @@ class SignUp extends Component {
                  marginForm
                />
                <Typography type="body1" className={classes.error}>
-                 {this.props.error.message}
+                 {this.props.auth.message}
                </Typography>
                <FlexBox>
                 <Button
@@ -117,6 +118,7 @@ class SignUp extends Component {
                   color="primary"
                   className={classes.button}
                   onClick={this.signUp}
+                  disabled={signing}
                 >
                   Sign Up
                 </Button>

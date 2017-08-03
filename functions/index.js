@@ -3,7 +3,7 @@ const admin = require('firebase-admin')
 
 admin.initializeApp(functions.config().firebase)
 
-exports.newNoteAlert = functions.database.ref('/Users/Notes/')
+exports.newNoteAlert = functions.database.ref('/Users/')
   .onWrite((event) => {
     const note = event.data.val()
     const getTokens = admin.database().ref('Users').once('value')
@@ -16,16 +16,16 @@ exports.newNoteAlert = functions.database.ref('/Users/Notes/')
         return tokens
       })
 
-    const getNote = admin.database().ref('Users').child('Notes').child(note.key)
-    Promise.all([getTokens, getNote]).then(([ tokens, note ]) => {
+    // const getNote = admin.database().ref('Users').child('Notes').child(note.key)
+    Promise.all([getTokens]).then(([ tokens ]) => {
       const payload = {
         notification: {
-          title: `Reminder from JustNote: ${note.title}`,
-          body: note.text
+          title: `Reminder from JustNote!`,
+          body: `Reminder`,
         }
       }
 
-      auth.messaging().sendToDevice(tokens, payload).catch(console.error)
+      // admin.messaging().sendToDevice(tokens, payload).catch(console.error)
     })
   })
 

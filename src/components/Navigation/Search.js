@@ -31,6 +31,9 @@ function Search({classes, search, handleSearchDrawer, handleSearchInput}) {
       <Input
         placeholder="Search"
         autoFocus
+        onKeyPress={e => {
+          e.key === 'Enter' && handleSearchDrawer()
+        }}
         className={classes.input}
         onChange={e => handleSearchInput(e.target.value)}
       />
