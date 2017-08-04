@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
 import Buttons from './Buttons'
+import Info from './Info'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
@@ -19,6 +20,7 @@ class TextFields extends Component {
     super(props)
     this.state = {
       note: {},
+      info: false,
       isNew: null,
       isNoteDisabled: null,
     }
@@ -67,28 +69,34 @@ class TextFields extends Component {
     })
   }
 
+  //note creation
   createNewNote(notes) {
+    const time = this.getTime()
     return {
       id: this.idGenerator(notes),
       title: '',
       text: '',
-      created: this.getTime(),
-      updated: this.getTime(),
+      created: time,
+      updated: time,
     }
   }
 
-  getTime() {
-		const utTime = new Date()
-		let month = utTime.getMonth()
-    let day = utTime.getDate()
+  saveNoteIntoList() {
+    const { note, isNoteDisabled, isNew } = this.state
+    const time = this.getTime()
 
-    if (month < 10 ) month = '0' + month
-    if (day < 10) day = '0' + day
-		const time = `${day}-${month}-${utTime.getFullYear()}`
-		return time
-	}
+    //check editing or creating note
+    if (!isNoteDisabled && !isNew) {
+      this.props.updateNote({ ...note, updated: time,})
+    } else if (isNew) {
+      //if the Title is empty then grab the text
+      note.title
+        ? this.addNote(note)
+        : this.addNote({...note, title: note.text.slice(0, 40)})
+    }
+  }
 
-
+  //function helpers
   idGenerator (array) {
     if (array.length < 1)
       return '001'
@@ -96,6 +104,18 @@ class TextFields extends Component {
       return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
+  getTime() {
+    const ut = new Date()
+    const date = ut.toDateString()
+    const fulltime = [ut.getHours(), ut.getMinutes(), ut.getSeconds()]
+    const time = fulltime.map(number  => {
+      if (number < 10) return '0' + number
+      return number
+    })
+    return `${date} ${time[0]}:${time[1]}:${time[2]}`
+  }
+
+  //actions
   removeNote = () => {
     this.props.removeNote(this.state.note.key)
     this.props.history.push('/notes')
@@ -106,24 +126,22 @@ class TextFields extends Component {
     this.props.history.push('/notes')
   }
 
+  //handlers
+  handleSaveButton = () => {
+    this.handleNoteDisabled()
+    this.saveNoteIntoList()
+  }
+
   handleNoteDisabled = () => {
     this.setState(prevState => ({
       isNoteDisabled: !prevState.isNoteDisabled
     }))
   }
 
-  handleSaveButton = () => {
-    const { note, isNoteDisabled, isNew } = this.state
-    this.handleNoteDisabled()
-
-    if (!isNoteDisabled && !isNew) {
-      this.props.updateNote({ ...note, updated: this.getTime(),})
-    } else if (isNew) {
-      //if the Title of the note is empty then grab the text
-      note.title
-        ? this.addNote(note)
-        : this.addNote({...note, title: note.text.slice(0, 40)})
-    }
+  handleInfoButton = () => {
+    this.setState(prevState => ({
+      info: !prevState.info
+    }))
   }
 
   handleInputChange = (e) => {
@@ -137,7 +155,7 @@ class TextFields extends Component {
 
   render() {
     const classes = this.props.classes
-    const { note, isNoteDisabled, isNew } = this.state
+    const { note, isNoteDisabled, isNew, info } = this.state
 
     return (
       <FlexItem>
@@ -156,6 +174,7 @@ class TextFields extends Component {
             isNoteDisabled={isNoteDisabled}
             removeNote={this.removeNote}
             handleSaveButton={this.handleSaveButton}
+            handleInfoButton={this.handleInfoButton}
           />
           <TextField
             name="text"
@@ -171,6 +190,11 @@ class TextFields extends Component {
             autoFocus
           />
         </FlexBoxWraped>
+        <Info
+          info={info}
+          note={note}
+          handleInfoButton={this.handleInfoButton}
+        />
         <DesktopHiddenBox>
           <Buttons
             isNoteDisabled={isNoteDisabled}
