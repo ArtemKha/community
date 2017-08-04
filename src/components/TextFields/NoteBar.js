@@ -28,12 +28,12 @@ const styleSheet = createStyleSheet('NoteBar', {
 NoteBar.propTypes = {
   isNew: PropTypes.bool.isRequired,
   isNoteDisabled: PropTypes.bool.isRequired,
-  handleEditButton: PropTypes.func.isRequired,
+  handleSaveButton: PropTypes.func.isRequired,
   removeNote: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 }
 
-function NoteBar({ classes, removeNote, handleEditButton, isNew, isNoteDisabled }) {
+function NoteBar({ classes, removeNote, handleSaveButton, isNew, isNoteDisabled }) {
 
   const EditButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
   const DeleteButton = () => !isNew &&
@@ -54,7 +54,7 @@ function NoteBar({ classes, removeNote, handleEditButton, isNew, isNoteDisabled 
           <IconButton
             color="default"
             aria-label="Delete"
-            onClick={handleEditButton}>
+            onClick={handleSaveButton}>
             <EditButtonIcon />
           </IconButton>
 

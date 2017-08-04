@@ -9,7 +9,6 @@ import { messaging } from './firebase'
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from './MaterialUiTheme'
 import Root from './components/Root'
-import 'typeface-roboto'
 
 const store = configureStore()
 

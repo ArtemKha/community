@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import Note from './Note'
 import Button from 'material-ui/Button'
 import { NoteListBox } from '../_styledComponents'
+import ReactLoading from 'react-loading'
 
 class Notes extends Component {
 
   static propTypes = {
     notes: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
     filter: PropTypes.string.isRequired,
     showAll: PropTypes.func.isRequired,
   }
@@ -22,7 +24,8 @@ class Notes extends Component {
   }
 
   render() {
-    const { notes, filter, showAll } = this.props
+    const { notes, filter, showAll, loading } = this.props
+
     const filteredList = this.filteredOutcome(notes, filter)
     const NoteList = filteredList.map((note, i) => (
       <Note note={note} key={note.key} index={i}/>
@@ -33,10 +36,13 @@ class Notes extends Component {
       <Button onClick={showAll} style={NoNotesStyle}>
         Click to show all notes
       </Button>
+    const NotesLoading = () => loading &&
+      <ReactLoading type="bubbles" color="purple"/>
 
     return (
       <NoteListBox>
         <NoNotesPlaceholer/>
+        <NotesLoading />
         {NoteList}
       </NoteListBox>
     )

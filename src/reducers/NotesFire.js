@@ -11,23 +11,28 @@ export default function NotesFb(state = [], action) {
         ...state,
         action.note
       ]
-
+      //maybe Array.filter will work better
     case NoteActionTypes.DELETE_NOTE:
+      const deletedNote = state.find(note => { return note.key === action.key })
+      const deletedIndex = state.indexOf(deletedNote)
+
       return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
+        ...state.slice(0, deletedIndex),
+        ...state.slice(deletedIndex + 1)
       ]
 
     case NoteActionTypes.EDIT_NOTE:
-      const note = state.find(note => { return note.key === action.note.key })
+      const editedNote = state.find(note => { return note.key === action.note.key })
+      const editedIndex = state.indexOf(editedNote)
+
       return [
-        ...state.slice(0, action.note.index),
+        ...state.slice(0, editedIndex),
         {
-          ...note,
+          ...editedNote,
           title: action.note.title,
           text: action.note.text
         },
-        ...state.slice(action.note.index + 1)
+        ...state.slice(editedIndex + 1)
       ]
     default:
       return state;

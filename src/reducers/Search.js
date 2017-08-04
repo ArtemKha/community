@@ -1,6 +1,6 @@
 import * as NoteActionTypes from '../actiontypes/filter';
 
-export default function filterTracks(state = '', action) {
+export default function filter(state = '', action) {
   switch (action.type) {
     case NoteActionTypes.SELECT_NOTE:
       return action.filter.toUpperCase();

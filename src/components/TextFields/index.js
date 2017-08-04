@@ -36,6 +36,7 @@ class TextFields extends Component {
     this.updateTextFields(this.props.match.params.id)
   }
 
+  //update view if note changed
   componentWillReceiveProps(nextProps) {
     const nextId = nextProps.match.params.id
     if(this.props.match.params.id !== nextId) {
@@ -45,34 +46,54 @@ class TextFields extends Component {
 
   updateTextFields(id) {
     let notes = this.props.notes
-    let note, noteIndex
-    let isNew = true
-    let isNoteDisabled = false
+    let note, isNew = true, isNoteDisabled = false
 
-    if (id === 'new' && notes.length) {
-      noteIndex = notes.length
-      note = { id: this.idGenerator(notes), title: '', text: '' }
-    } else if (id === 'new' && notes.length < 1) {
-      noteIndex = 0
-      note = { id: '001', title: '', text: '' }
-    } else if (notes.findIndex((note) => note.id === id) !== -1) {
-      noteIndex = notes.findIndex((note) => note.id === id)
-      note = notes[noteIndex]
-      isNew = false
-      isNoteDisabled = true
+    if (id === 'new') {
+      note = this.createNewNote(notes)
     } else {
-      this.props.history.push('/404')
+      note = notes.find((note) => note.id === id)
+      if (note) {
+        isNew = false
+        isNoteDisabled = true
+      } else {
+        this.props.history.push('/404')
+      }
     }
 
-    this.state = {
-      note: { ...note, index: noteIndex },
+    this.setState({
+      note: note,
       isNew: isNew,
       isNoteDisabled: isNoteDisabled,
+    })
+  }
+
+  createNewNote(notes) {
+    return {
+      id: this.idGenerator(notes),
+      title: '',
+      text: '',
+      created: this.getTime(),
+      updated: this.getTime(),
     }
   }
 
+  getTime() {
+		const utTime = new Date()
+		let month = utTime.getMonth()
+    let day = utTime.getDate()
+
+    if (month < 10 ) month = '0' + month
+    if (day < 10) day = '0' + day
+		const time = `${day}-${month}-${utTime.getFullYear()}`
+		return time
+	}
+
+
   idGenerator (array) {
-    return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
+    if (array.length < 1)
+      return '001'
+    else
+      return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
   removeNote = () => {
@@ -91,12 +112,12 @@ class TextFields extends Component {
     }))
   }
 
-  handleEditButton = () => {
+  handleSaveButton = () => {
     const { note, isNoteDisabled, isNew } = this.state
     this.handleNoteDisabled()
 
     if (!isNoteDisabled && !isNew) {
-      this.props.updateNote(note)
+      this.props.updateNote({ ...note, updated: this.getTime(),})
     } else if (isNew) {
       //if the Title of the note is empty then grab the text
       note.title
@@ -134,7 +155,7 @@ class TextFields extends Component {
             isNew={isNew}
             isNoteDisabled={isNoteDisabled}
             removeNote={this.removeNote}
-            handleEditButton={this.handleEditButton}
+            handleSaveButton={this.handleSaveButton}
           />
           <TextField
             name="text"
@@ -153,7 +174,7 @@ class TextFields extends Component {
         <DesktopHiddenBox>
           <Buttons
             isNoteDisabled={isNoteDisabled}
-            handleEditButton={this.handleEditButton}
+            handleSaveButton={this.handleSaveButton}
           />
         </DesktopHiddenBox>
       </FlexItem>

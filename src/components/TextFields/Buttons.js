@@ -25,15 +25,15 @@ const styleSheet = createStyleSheet('Buttons', theme => ({
 
 Buttons.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleEditButton: PropTypes.func.isRequired,
+  handleSaveButton: PropTypes.func.isRequired,
   isNoteDisabled: PropTypes.bool.isRequired,
 }
 
-function Buttons({ classes, isNoteDisabled, handleEditButton }) {
+function Buttons({ classes, isNoteDisabled, handleSaveButton }) {
   const Buttons = () => isNoteDisabled &&
     <div>
       <Button fab color="accent" className={classes.main}
-        onClick={handleEditButton}>
+        onClick={handleSaveButton}>
         <EditIcon />
       </Button>
       <NavLink to={`/notes`}>

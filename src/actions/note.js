@@ -7,6 +7,7 @@ export function getUserNotesPath(user) {
 }
 
 export function addNote(note) {
+  console.log('newNote', note)
   return dispatch => {
     dispatch(NoteRequestedAction())
     const newRef = NotesRef.push(note)
@@ -34,7 +35,7 @@ export function watchNoteChangedEvent(user) {
   return dispatch => {
 
     NotesRef.on('child_removed', (snap) => {
-      dispatch(destroyNote(snap.val().index))
+      dispatch(destroyNote(snap.key))
     })
 
     NotesRef.on('child_changed', (snap) => {
@@ -56,10 +57,10 @@ const addToNotes = note => {
   }
 }
 
-export const destroyNote = index => {
+export const destroyNote = key => {
   return {
     type: NoteActionTypes.DELETE_NOTE,
-    index
+    key
   }
 }
 
