@@ -16,13 +16,13 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
 }))
 
 class TextFields extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       note: {},
       info: false,
-      isNew: null,
-      isNoteDisabled: null,
+      isNew: true,
+      isNoteDisabled: false,
     }
   }
 
@@ -47,26 +47,21 @@ class TextFields extends Component {
   }
 
   updateTextFields(id) {
-    let notes = this.props.notes
-    let note, isNew = true, isNoteDisabled = false
+    const notes = this.props.notes
+    let note, flags
 
     if (id === 'new') {
       note = this.createNewNote(notes)
+      flags = { isNew: true, isNoteDisabled: false }
+      this.setState({ note, ...flags })
     } else {
       note = notes.find((note) => note.id === id)
-      if (note) {
-        isNew = false
-        isNoteDisabled = true
-      } else {
-        this.props.history.push('/404')
-      }
+      if (note){
+        flags = { isNew: false, isNoteDisabled: true }
+        this.setState({ note, ...flags })
+      } else
+        this.props.history.push('/notes')
     }
-
-    this.setState({
-      note: note,
-      isNew: isNew,
-      isNoteDisabled: isNoteDisabled,
-    })
   }
 
   //note creation
@@ -78,6 +73,7 @@ class TextFields extends Component {
       text: '',
       created: time,
       updated: time,
+      timestamp: Date.now(),
     }
   }
 
@@ -87,12 +83,11 @@ class TextFields extends Component {
 
     //check editing or creating note
     if (!isNoteDisabled && !isNew) {
-      this.props.updateNote({ ...note, updated: time,})
+      const edited = { ...note, updated: time, timestamp: Date.now() }
+      this.props.updateNote(edited)
     } else if (isNew) {
-      //if the Title is empty then grab the text
-      note.title
-        ? this.addNote(note)
-        : this.addNote({...note, title: note.text.slice(0, 40)})
+      const title = note.title ? note.title : note.text.slice(0, 40)
+      this.addNote({ ...note, title: title })
     }
   }
 
@@ -176,12 +171,17 @@ class TextFields extends Component {
             handleSaveButton={this.handleSaveButton}
             handleInfoButton={this.handleInfoButton}
           />
+          <Info
+            info={info}
+            note={note}
+            handleInfoButton={this.handleInfoButton}
+          />
           <TextField
             name="text"
+            label="Note"
             className={classes.input}
             rows="6"
             value={note.text}
-            placeholder="What great idea do you have?"
             onChange={this.handleInputChange}
             multiline
             rowsMax="20"
@@ -190,11 +190,6 @@ class TextFields extends Component {
             autoFocus
           />
         </FlexBoxWraped>
-        <Info
-          info={info}
-          note={note}
-          handleInfoButton={this.handleInfoButton}
-        />
         <DesktopHiddenBox>
           <Buttons
             isNoteDisabled={isNoteDisabled}

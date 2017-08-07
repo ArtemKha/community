@@ -7,7 +7,6 @@ export function getUserNotesPath(user) {
 }
 
 export function addNote(note) {
-  console.log('newNote', note)
   return dispatch => {
     dispatch(NoteRequestedAction())
     const newRef = NotesRef.push(note)

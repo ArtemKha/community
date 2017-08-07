@@ -16,23 +16,21 @@ AlertDialog.propTypes = {
 
 export default function AlertDialog({handleInfoButton, info, note}) {
   return (
-    <div>
-      <Dialog open={info} onRequestClose={handleInfoButton}>
-        <DialogTitle>
-          {"Info"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <span>Created: {note.created}</span><br />
-            <span>Updated: {note.updated}</span>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleInfoButton} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog open={info} onRequestClose={handleInfoButton}>
+      <DialogTitle>
+        {"Info"}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          <span>Created: {note.created}</span><br />
+          <span>Updated: {note.updated}</span>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleInfoButton} color="primary">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }

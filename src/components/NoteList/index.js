@@ -4,6 +4,7 @@ import Note from './Note'
 import Button from 'material-ui/Button'
 import { NoteListBox } from '../_styledComponents'
 import ReactLoading from 'react-loading'
+// import { sort, prop, descend } from 'ramda'
 
 class Notes extends Component {
 
@@ -25,8 +26,9 @@ class Notes extends Component {
 
   render() {
     const { notes, filter, showAll, loading } = this.props
-
     const filteredList = this.filteredOutcome(notes, filter)
+    // const sotrtedList = sort(descend(prop('timestamp')))(filteredList)
+
     const NoteList = filteredList.map((note, i) => (
       <Note note={note} key={note.key} index={i}/>
     ))
@@ -38,7 +40,6 @@ class Notes extends Component {
       </Button>
     const NotesLoading = () => loading &&
       <ReactLoading type="bubbles" color="purple"/>
-
     return (
       <NoteListBox>
         <NoNotesPlaceholer/>

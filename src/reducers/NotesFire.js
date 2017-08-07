@@ -1,5 +1,6 @@
 import * as NotesActionTypes from '../actiontypes/notes'
 import * as NoteActionTypes from '../actiontypes/note'
+import { find, propEq } from 'ramda'
 
 export default function NotesFb(state = [], action) {
   switch(action.type) {
@@ -9,31 +10,30 @@ export default function NotesFb(state = [], action) {
     case NoteActionTypes.ADD_NOTE:
       return [
         ...state,
-        action.note
+        action.note,
       ]
-      //maybe Array.filter will work better
-    case NoteActionTypes.DELETE_NOTE:
-      const deletedNote = state.find(note => { return note.key === action.key })
-      const deletedIndex = state.indexOf(deletedNote)
 
+    case NoteActionTypes.DELETE_NOTE:
+      const dnote = find(propEq('key', action.key), state)
+      const dIndex = state.indexOf(dnote)
       return [
-        ...state.slice(0, deletedIndex),
-        ...state.slice(deletedIndex + 1)
+        ...state.slice(0, dIndex),
+        ...state.slice(dIndex + 1)
       ]
 
     case NoteActionTypes.EDIT_NOTE:
-      const editedNote = state.find(note => { return note.key === action.note.key })
-      const editedIndex = state.indexOf(editedNote)
-
+      const eNote = find(propEq('key', action.note.key), state)
+      const eIndex = state.indexOf(eNote)
       return [
-        ...state.slice(0, editedIndex),
+        ...state.slice(0, eIndex),
         {
-          ...editedNote,
+          ...eNote,
           title: action.note.title,
           text: action.note.text
         },
-        ...state.slice(editedIndex + 1)
+        ...state.slice(eIndex + 1)
       ]
+
     default:
       return state;
   }
