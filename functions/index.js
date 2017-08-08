@@ -3,37 +3,37 @@ const admin = require('firebase-admin')
 
 admin.initializeApp(functions.config().firebase)
 
-exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{note}')
+exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{noteId}')
   .onWrite((event) => {
-    const data = event.data.val()
+    // const data = event.data.val()
+    const uid = event.params.uid
+    const noteId = event.params.noteId
 
     const getToken = admin.database().ref('Users').once('value')
       .then((snapshot) => {
         const token = snapshot.child(uid).child('token').val()
         return token
       })
-    //
-    // const getToken = admin.database().ref('Users').once('value')
-    //   .then((snapshot) => {
-    //     const tokens = []
-    //     snapshot.forEach((user) => {
-    //       const token = user.child('token').val()
-    //       if (token) tokens.push(token)
-    //     })
-    //     return tokens
-    //   })
 
-    // const getNote = admin.database().ref('Users')
-    //               .child(uid).child('Notes').child(note.key)
-    Promise.all([getToken]).then(([ token ]) => {
+    const getNote = admin.database().ref('Users').once('value')
+      .then((snapshot) => {
+        const note = snapshot.child(uid).child('Notes').child(noteId).val()
+        console.log('time', note.timestamp)
+        return note
+      })
+
+    Promise.all([getToken, getNote]).then(([token, note]) => {
       const payload = {
         notification: {
-          title: `Reminder from JustNote!`,
-          body: `Reminder`,
+          title: note.title,
+          body: note.text,
         }
       }
 
-      admin.messaging().sendToDevice(token, payload).catch(console.error)
+      setTimeout(function(){
+        admin.messaging().sendToDevice([token], payload).catch(console.error)
+      }, 60000);
+
     })
   })
 
