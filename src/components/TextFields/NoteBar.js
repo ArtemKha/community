@@ -32,6 +32,7 @@ NoteBar.propTypes = {
   removeNote: PropTypes.func.isRequired,
   handleSaveButton: PropTypes.func.isRequired,
   handleInfoButton: PropTypes.func.isRequired,
+  handleReminderButton: PropTypes.func.isRequired,
 }
 
 function NoteBar(props) {
@@ -42,6 +43,7 @@ function NoteBar(props) {
     removeNote,
     handleSaveButton,
     handleInfoButton,
+    handleReminderButton,
   } = props
 
   const EditButtonIcon = () => isNoteDisabled ? <EditIcon /> : <SaveIcon />
@@ -70,7 +72,7 @@ function NoteBar(props) {
           <AlignedRightBox>
             <DeleteButton />
             <IconButton color="default" aria-label="Menu">
-              <NotificationIcon />
+              <NotificationIcon onClick={handleReminderButton}/>
             </IconButton>
             <IconButton color="default" aria-label="Info">
               <InfoIcon onClick={handleInfoButton}/>

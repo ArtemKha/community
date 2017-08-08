@@ -3,21 +3,29 @@ const admin = require('firebase-admin')
 
 admin.initializeApp(functions.config().firebase)
 
-exports.newNoteAlert = functions.database.ref('/Users/')
+exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{note}')
   .onWrite((event) => {
-    const note = event.data.val()
-    const getTokens = admin.database().ref('Users').once('value')
-      .then((snapshot) => {
-        const tokens = []
-        snapshot.forEach((user) => {
-          const token = user.child('token').val()
-          if (token) tokens.push(token)
-        })
-        return tokens
-      })
+    const data = event.data.val()
 
-    // const getNote = admin.database().ref('Users').child('Notes').child(note.key)
-    Promise.all([getTokens]).then(([ tokens ]) => {
+    const getToken = admin.database().ref('Users').once('value')
+      .then((snapshot) => {
+        const token = snapshot.child(uid).child('token').val()
+        return token
+      })
+    //
+    // const getToken = admin.database().ref('Users').once('value')
+    //   .then((snapshot) => {
+    //     const tokens = []
+    //     snapshot.forEach((user) => {
+    //       const token = user.child('token').val()
+    //       if (token) tokens.push(token)
+    //     })
+    //     return tokens
+    //   })
+
+    // const getNote = admin.database().ref('Users')
+    //               .child(uid).child('Notes').child(note.key)
+    Promise.all([getToken]).then(([ token ]) => {
       const payload = {
         notification: {
           title: `Reminder from JustNote!`,
@@ -25,7 +33,7 @@ exports.newNoteAlert = functions.database.ref('/Users/')
         }
       }
 
-      // admin.messaging().sendToDevice(tokens, payload).catch(console.error)
+      admin.messaging().sendToDevice(token, payload).catch(console.error)
     })
   })
 

@@ -24,12 +24,15 @@ export default function NotesFb(state = [], action) {
     case NoteActionTypes.EDIT_NOTE:
       const eNote = find(propEq('key', action.note.key), state)
       const eIndex = state.indexOf(eNote)
+      const { title, text, timestamp, updated } = action.note
       return [
         ...state.slice(0, eIndex),
         {
           ...eNote,
-          title: action.note.title,
-          text: action.note.text
+          title,
+          text,
+          timestamp,
+          updated
         },
         ...state.slice(eIndex + 1)
       ]

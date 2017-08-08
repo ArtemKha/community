@@ -4,6 +4,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
 import Buttons from './Buttons'
 import Info from './Info'
+import Reminder from './Reminder'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
@@ -21,6 +22,7 @@ class TextFields extends Component {
     this.state = {
       note: {},
       info: false,
+      reminder: false,
       isNew: true,
       isNoteDisabled: false,
     }
@@ -139,6 +141,12 @@ class TextFields extends Component {
     }))
   }
 
+  handleReminderButton = () => {
+    this.setState(prevState => ({
+      reminder: !prevState.reminder
+    }))
+  }
+
   handleInputChange = (e) => {
     this.setState({
       note: {
@@ -150,7 +158,7 @@ class TextFields extends Component {
 
   render() {
     const classes = this.props.classes
-    const { note, isNoteDisabled, isNew, info } = this.state
+    const { note, isNoteDisabled, isNew, info, reminder } = this.state
 
     return (
       <FlexItem>
@@ -170,11 +178,16 @@ class TextFields extends Component {
             removeNote={this.removeNote}
             handleSaveButton={this.handleSaveButton}
             handleInfoButton={this.handleInfoButton}
+            handleReminderButton={this.handleReminderButton}
           />
           <Info
             info={info}
             note={note}
             handleInfoButton={this.handleInfoButton}
+          />
+          <Reminder
+            reminder={reminder}
+            handleReminderButton={this.handleReminderButton}
           />
           <TextField
             name="text"
