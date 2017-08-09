@@ -93,6 +93,16 @@ class TextFields extends Component {
     }
   }
 
+  addReminder = (time) => {
+    const { note } = this.state
+    this.handleReminderButton()
+    console.log(time)
+
+    this.props.match.params.id === 'new'
+      ? this.setState({ remind: time })
+      : this.props.updateNote({ ...note, remind: time })
+  }
+
   //function helpers
   idGenerator (array) {
     if (array.length < 1)
@@ -188,6 +198,7 @@ class TextFields extends Component {
           <Reminder
             reminder={reminder}
             handleReminderButton={this.handleReminderButton}
+            addReminder={this.addReminder}
           />
           <TextField
             name="text"

@@ -50,9 +50,7 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
-      error: {
-        message: '',
-      }
+      error: ''
     }
   }
 
@@ -69,6 +67,7 @@ class SignUp extends Component {
 
   componentWillReceiveProps(nextProps) {
     nextProps.user && this.props.history.push('/notes')
+    nextProps.auth.message && this.setState({ error: nextProps.auth.message })
   }
 
   signUp = () => {
@@ -110,7 +109,7 @@ class SignUp extends Component {
                  marginForm
                />
                <Typography type="body1" className={classes.error}>
-                 {this.props.auth.message}
+                 {this.state.error}
                </Typography>
                <FlexBox>
                 <Button

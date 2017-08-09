@@ -1,6 +1,7 @@
 import * as NoteActionTypes from '../actiontypes/note'
 import { UsersRef } from '../firebase'
 let NotesRef = UsersRef.child('/Share/Notes')
+//just for now I mostly don't care about errors status from the server
 
 export function getUserNotesPath(user) {
   NotesRef = UsersRef.child(user.uid).child('/Notes')

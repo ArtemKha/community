@@ -10,16 +10,27 @@ import Dialog, {
 
 
 export default class ReminderDialog extends Component {
+  constructor() {
+    super()
+    const date = new Date().toISOString().substring(0, 16)
+
+    this.state = {
+      remind: date
+    }
+  }
 
   static propTypes = {
     reminder: PropTypes.bool.isRequired,
+    addReminder: PropTypes.func.isRequired,
     handleReminderButton: PropTypes.func.isRequired,
   }
 
   render() {
-    const {handleReminderButton, reminder} = this.props
-    const date = new Date().toISOString().substring(0, 16)
-    const isReminder = false
+    const {handleReminderButton, reminder, addReminder} = this.props
+    const { remind } = this.state
+
+    //this feature will be implemented later
+    const isReminder = true
 
     return (
       <Dialog open={reminder} onRequestClose={handleReminderButton}>
@@ -31,7 +42,8 @@ export default class ReminderDialog extends Component {
             id="date"
             label="On date"
             type="datetime-local"
-            defaultValue={date}
+            onChange={e => this.setState({ remind: e.target.value})}
+            defaultValue={this.state.remind}
             InputLabelProps={{
               shrink: true,
             }}
@@ -39,7 +51,7 @@ export default class ReminderDialog extends Component {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleReminderButton}
+            onClick={remind => addReminder(remind)}
             disabled={isReminder}
             color="default"
             >
@@ -47,7 +59,7 @@ export default class ReminderDialog extends Component {
           </Button>
           <Button
             onClick={handleReminderButton}
-            disabled={!isReminder}
+            disabled={isReminder}
             color="default"
             >
             Remove
