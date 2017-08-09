@@ -12,6 +12,7 @@ const styleSheet = createStyleSheet('Buttons', theme => ({
     position: 'fixed',
     bottom: '10px',
     right: '10px',
+    transition: 'bottom 0.5s',
   },
   shifted: {
     margin: theme.spacing.unit,
@@ -20,7 +21,11 @@ const styleSheet = createStyleSheet('Buttons', theme => ({
     right: '75px',
     width: '45px',
     height: '45px',
+    transition: 'bottom 0.5s',
   },
+  hide: {
+    bottom: '-80px',
+  }
 }))
 
 Buttons.propTypes = {
@@ -30,21 +35,22 @@ Buttons.propTypes = {
 }
 
 function Buttons({ classes, isNoteDisabled, handleSaveButton }) {
-  const Buttons = () => isNoteDisabled &&
+  const hiddenClass = !isNoteDisabled && classes.hide
+  const mainClass = `${classes.main} ${hiddenClass}`
+  const shiftedClass = `${classes.shifted} ${hiddenClass}`
+
+  return (
     <div>
-      <Button fab color="accent" className={classes.main}
+      <Button fab color="accent" className={mainClass}
         onClick={handleSaveButton}>
         <EditIcon />
       </Button>
       <NavLink to={`/notes`}>
-        <Button fab color="default" className={classes.shifted}>
+        <Button fab color="default" className={shiftedClass}>
           <ArrowBack />
         </Button>
       </NavLink>
     </div>
-
-  return (
-    <Buttons />
   )
 }
 

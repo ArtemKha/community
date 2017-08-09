@@ -5,7 +5,6 @@ admin.initializeApp(functions.config().firebase)
 
 exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{noteId}')
   .onWrite((event) => {
-    // const data = event.data.val()
     const uid = event.params.uid
     const noteId = event.params.noteId
 
@@ -30,9 +29,9 @@ exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{noteId}')
         }
       }
 
-      setTimeout(function(){
-        admin.messaging().sendToDevice([token], payload).catch(console.error)
-      }, 60000);
+      // setTimeout(function(){
+      //   admin.messaging().sendToDevice([token], payload).catch(console.error)
+      // }, 60000);
 
     })
   })

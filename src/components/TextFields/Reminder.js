@@ -27,7 +27,6 @@ export default class ReminderDialog extends Component {
 
   render() {
     const {handleReminderButton, reminder, addReminder} = this.props
-    const { remind } = this.state
 
     //this feature will be implemented later
     const isReminder = true
@@ -48,6 +47,7 @@ export default class ReminderDialog extends Component {
               shrink: true,
             }}
           />
+          <br/><small>Reminder will be implemented soon</small>
         </DialogContent>
         <DialogActions>
           <Button

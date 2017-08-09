@@ -92,3 +92,33 @@ export const AlignedRightBox = styled.div`
 
 //sign in-out froms
 export const linkStyle = {textDecoration: 'none', color: '#7b1fa2'}
+
+
+export const AnimatedEnter = styled.div`
+  .fade-leave {
+    opacity: 1;
+  }
+
+  .fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
+  .fade-appear {
+    opacity: 0;
+  }
+
+  .fade-appear.fade-appear-active{
+   opacity: 1;
+   transition: opacity 0.5s ease-in;
+  }
+
+  .fade-enter {
+    opacity: 0;
+  }
+
+  .fade-enter.fade-enter-active{
+   opacity: 1;
+   transition: opacity 0.5s ease-in;
+  }
+`
