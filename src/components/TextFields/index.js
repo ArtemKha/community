@@ -171,7 +171,7 @@ class TextFields extends Component {
     const { note, isNoteDisabled, isNew, info, reminder } = this.state
 
     return (
-      <FlexItem>
+      <div>
         <FlexBoxWraped>
           <TextField
             name="title"
@@ -220,7 +220,7 @@ class TextFields extends Component {
             handleSaveButton={this.handleSaveButton}
           />
         </DesktopHiddenBox>
-      </FlexItem>
+      </div>
     )
   }
 }

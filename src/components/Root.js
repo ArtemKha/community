@@ -45,8 +45,7 @@ function Root() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={SignIn}/>
-          <PrivateRoute exact path="/notes" component={ListView}/>
-          <PrivateRoute path="/notes/:id" component={NoteView}/>
+          <PrivateRoute path="/notes" component={ListView}/>
           <Route path="/signup" component={SignUp}/>
           <Route path="/signin" component={SignIn}/>
           <Route path="/404" component={NoMatch}/>

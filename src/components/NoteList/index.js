@@ -41,11 +41,11 @@ class Notes extends Component {
       <ReactLoading type="bubbles" color="purple"/>
 
     return (
-      <NoteListBox>
+      <div>
         {NoNotesPlaceholer}
         <NotesLoading />
         {NoteList}
-      </NoteListBox>
+      </div>
     )
   }
 }

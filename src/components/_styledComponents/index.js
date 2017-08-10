@@ -27,15 +27,6 @@ export const MobileHiddenBox = styled.div`
     display: none;
   }
 `
-export const MobileHiddenNoteView = styled.div`
-  @media (max-width: 700px) {
-    display: none;
-  }
-
-  @media (max-width: 1024px) and (orientation: landscape) {
-    display: none;
-  }
-`
 export const DesktopHiddenBox = styled.div`
   @media (min-width: 700px) {
     display: none;

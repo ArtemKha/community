@@ -36,8 +36,8 @@ Buttons.propTypes = {
 
 function Buttons({ classes, isNoteDisabled, handleSaveButton }) {
   const hiddenClass = !isNoteDisabled && classes.hide
-  const mainClass = `${classes.main} ${hiddenClass}`
-  const shiftedClass = `${classes.shifted} ${hiddenClass}`
+  const mainClass = classes.main + ' ' + hiddenClass
+  const shiftedClass = classes.shifted + ' ' + hiddenClass
 
   return (
     <div>
