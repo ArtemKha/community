@@ -16,10 +16,11 @@ export const FlexBoxWraped = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 5%;
 
   input:disabled,
   textarea:disabled {
-    color: rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, 0.7);
   }
 `
 

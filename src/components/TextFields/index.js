@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
-import TextField from 'material-ui/TextField'
+import Input from 'material-ui/Input/Input'
 import Buttons from './Buttons'
 import Info from './Info'
 import Reminder from './Reminder'
@@ -173,14 +173,14 @@ class TextFields extends Component {
     return (
       <FlexItem>
         <FlexBoxWraped>
-          <TextField
+          <Input
             name="title"
-            label="Title"
+            placeholder="Title"
             className={classes.input}
             value={note.title}
             onChange={this.handleInputChange}
-            marginForm
             disabled={isNoteDisabled}
+            disableUnderline
           />
           <NoteBar
             isNew={isNew}
@@ -200,18 +200,18 @@ class TextFields extends Component {
             handleReminderButton={this.handleReminderButton}
             addReminder={this.addReminder}
           />
-          <TextField
+          <Input
             name="text"
-            label="Note"
+            placeholder="Note"
             className={classes.input}
             rows="6"
             value={note.text}
             onChange={this.handleInputChange}
             multiline
             rowsMax="20"
-            marginForm
             disabled={isNoteDisabled}
             autoFocus
+            disableUnderline
           />
         </FlexBoxWraped>
         <DesktopHiddenBox>
