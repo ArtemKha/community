@@ -66,7 +66,7 @@ export const NoteListBox = styled.div`
 	}
 
   ::-webkit-scrollbar-track {
-	  background-color: #F5F5F5;
+	  background-color: #fafafa;
     width: 8px;
   }
 
@@ -76,7 +76,7 @@ export const NoteListBox = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #d3d3d3;
+    background-color: #f2efef;
   }
 `
 

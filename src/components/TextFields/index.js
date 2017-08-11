@@ -135,25 +135,14 @@ class TextFields extends Component {
 
   //handlers
   handleSaveButton = () => {
-    this.handleNoteDisabled()
+    this.handleOption('isNoteDisabled')
     this.saveNoteIntoList()
   }
 
-  handleNoteDisabled = () => {
-    this.setState(prevState => ({
-      isNoteDisabled: !prevState.isNoteDisabled
-    }))
-  }
 
-  handleInfoButton = () => {
+  handleOption = option => {
     this.setState(prevState => ({
-      info: !prevState.info
-    }))
-  }
-
-  handleReminderButton = () => {
-    this.setState(prevState => ({
-      reminder: !prevState.reminder
+      [option]: !prevState[option]
     }))
   }
 
@@ -187,22 +176,22 @@ class TextFields extends Component {
             isNoteDisabled={isNoteDisabled}
             removeNote={this.removeNote}
             handleSaveButton={this.handleSaveButton}
-            handleInfoButton={this.handleInfoButton}
-            handleReminderButton={this.handleReminderButton}
+            handleInfoButton={() => this.handleOption('info')}
+            handleReminderButton={() => this.handleOption('reminder')}
           />
           <Info
             info={info}
             note={note}
-            handleInfoButton={this.handleInfoButton}
+            handleInfoButton={() => this.handleOption('info')}
           />
           <Reminder
             reminder={reminder}
-            handleReminderButton={this.handleReminderButton}
+            handleReminderButton={() => this.handleOption('reminder')}
             addReminder={this.addReminder}
           />
           <Input
             name="text"
-            placeholder="Note"
+            placeholder="What's on your mind?"
             className={classes.input}
             rows="6"
             value={note.text}
