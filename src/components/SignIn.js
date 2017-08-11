@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { FlexBox, linkStyle } from './_styledComponents'
+import { FlexBox, linkStyle, BgSigning } from './_styledComponents'
 
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -13,8 +13,8 @@ import Button from 'material-ui/Button'
 const styleSheet = createStyleSheet('SignIn', {
   root: {
     'max-width': '90%',
-    marginTop: '10%',
     margin: '0 auto',
+    paddingTop: '10%',
   },
   container: {
     display: 'flex',
@@ -86,6 +86,7 @@ class SignIn extends Component {
     const signing = this.props.auth.signing
 
     return (
+      <BgSigning>
       <div className={classes.root}>
         <div className={classes.paper}>
           <AppBar position="static" color="default">
@@ -130,6 +131,7 @@ class SignIn extends Component {
           </AppBar>
         </div>
       </div>
+      </BgSigning>
     )
   }
 }

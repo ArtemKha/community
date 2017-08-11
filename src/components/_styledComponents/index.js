@@ -1,4 +1,10 @@
 import styled, { keyframes } from 'styled-components'
+import Background from '../../assets/bg_sign.png'
+
+export const BgSigning = styled.div`
+  background-image: url(${Background});
+  height: 100vh;
+`
 
 export const FlexBox = styled.div`
   box-sizing: border-box;
