@@ -16,20 +16,23 @@ const styleSheet = createStyleSheet('Note', theme => ({
 Note.propTypes = {
   classes: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
-function Note({ classes, note }) {
+function Note({ classes, note, history }) {
   let { title, text, id } = note
   const showTitle = title.slice(0, 40)
   const showText = text.slice(0, 80) + '...'
 
+  function toNote() {
+    history.push(`/notes/${id}`)
+  }
+
   return (
-    <List className={classes.root}>
-      <NavLink to={`/notes/${id}`} style={linkStyle}>
-        <ListItem button>
-          <ListItemText primary={showTitle} secondary={showText} />
-        </ListItem>
-    </NavLink>
+    <List className={classes.root} onClick={toNote}>
+      <ListItem button>
+        <ListItemText primary={showTitle} secondary={showText} />
+      </ListItem>
     </List>
   )
 }

@@ -191,7 +191,7 @@ class TextFields extends Component {
           />
           <Input
             name="text"
-            placeholder="What's on your mind?"
+            placeholder="Note: What's on your mind?"
             className={classes.input}
             rows="6"
             value={note.text}

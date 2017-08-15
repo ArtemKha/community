@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { showAll } from '../actions/filter'
+import { withRouter } from 'react-router'
 import NoteList from '../components/NoteList'
 
 
@@ -17,4 +18,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteList)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteList))

@@ -6,6 +6,8 @@ export default function NotesLoading(state = false, action) {
       return true
     case NotesActionTypes.GET_NOTES_RECEIVED:
       return false
+    case NotesActionTypes.GET_NOTES_REJECTED:
+      return false
     default:
       return state;
   }

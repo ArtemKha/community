@@ -14,7 +14,7 @@ export function getNotes(user) {
     })
     .catch((error) => {
       console.log(error)
-      dispatch(getNotesRejectedAction())
+      dispatch(getNotesRejectedAction(error))
     })
   }
 }
@@ -25,9 +25,10 @@ function getNotesRequestedAction() {
   }
 }
 
-function getNotesRejectedAction() {
+function getNotesRejectedAction(error) {
   return {
-    type: NotesActionTypes.GET_NOTES_REJECTED
+    type: NotesActionTypes.GET_NOTES_REJECTED,
+    error
   }
 }
 

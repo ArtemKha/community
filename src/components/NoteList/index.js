@@ -10,6 +10,7 @@ class Notes extends Component {
 
   static propTypes = {
     notes: PropTypes.array.isRequired,
+    history: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     filter: PropTypes.string.isRequired,
     showAll: PropTypes.func.isRequired,
@@ -30,7 +31,7 @@ class Notes extends Component {
     const sotrtedList = sort(descend(prop('timestamp')))(filteredList)
 
     const NoteList = sotrtedList.map((note, i) => (
-      <Note note={note} key={note.key} index={i}/>
+      <Note note={note} key={note.key} index={i} history={this.props.history}/>
     ))
 
     const NoNotesPlaceholer =  filter &&
