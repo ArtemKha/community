@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { FlexBox, linkStyle, BgSigning } from './_styledComponents'
+import { FlexBox, linkStyle } from './_styledComponents'
 
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -86,52 +86,50 @@ class SignUp extends Component {
     const signing = this.props.auth.signing
 
     return (
-      <BgSigning>
-        <div className={classes.root}>
-          <div className={classes.paper}>
-            <AppBar position="static" color="default">
-              <Toolbar className={classes.container}>
-                <Typography type="title" color="inherit">
+      <div className={classes.root}>
+        <div className={classes.paper}>
+          <AppBar position="static" color="default">
+            <Toolbar className={classes.container}>
+              <Typography type="title" color="inherit">
+                Sign Up
+              </Typography>
+                <TextField
+                name="email"
+                label="E-mail"
+                className={classes.input}
+                onChange={this.handleInputChange}
+                marginForm
+                />
+                <TextField
+                 name="password"
+                 label="Password"
+                 className={classes.input}
+                 onChange={this.handleInputChange}
+                 type="password"
+                 marginForm
+               />
+               <Typography type="body1" className={classes.error}>
+                 {this.state.error}
+               </Typography>
+               <FlexBox>
+                <Button
+                  raised
+                  color="primary"
+                  className={classes.button}
+                  onClick={this.signUp}
+                  disabled={signing}
+                >
                   Sign Up
+                </Button>
+                <Typography type="body1" color="inherit" className={classes.typo}>
+                  Do you have an account? <br />
+                  <Link to={'/signin'} style={linkStyle}>Sign In</Link>
                 </Typography>
-                  <TextField
-                  name="email"
-                  label="E-mail"
-                  className={classes.input}
-                  onChange={this.handleInputChange}
-                  marginForm
-                  />
-                  <TextField
-                   name="password"
-                   label="Password"
-                   className={classes.input}
-                   onChange={this.handleInputChange}
-                   type="password"
-                   marginForm
-                 />
-                 <Typography type="body1" className={classes.error}>
-                   {this.state.error}
-                 </Typography>
-                 <FlexBox>
-                  <Button
-                    raised
-                    color="primary"
-                    className={classes.button}
-                    onClick={this.signUp}
-                    disabled={signing}
-                  >
-                    Sign Up
-                  </Button>
-                  <Typography type="body1" color="inherit" className={classes.typo}>
-                    Do you have an account? <br />
-                    <Link to={'/signin'} style={linkStyle}>Sign In</Link>
-                  </Typography>
-                </FlexBox>
-              </Toolbar>
-            </AppBar>
-          </div>
+              </FlexBox>
+            </Toolbar>
+          </AppBar>
         </div>
-      </BgSigning>
+      </div>
     )
   }
 }

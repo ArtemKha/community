@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { FlexBox, linkStyle, BgSigning } from './_styledComponents'
+import { FlexBox, linkStyle } from './_styledComponents'
 
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -86,7 +86,6 @@ class SignIn extends Component {
     const signing = this.props.auth.signing
 
     return (
-      <BgSigning>
       <div className={classes.root}>
         <div className={classes.paper}>
           <AppBar position="static" color="default">
@@ -131,7 +130,6 @@ class SignIn extends Component {
           </AppBar>
         </div>
       </div>
-      </BgSigning>
     )
   }
 }
