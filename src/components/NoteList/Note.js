@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, createStyleSheet } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import { NavLink } from 'react-router-dom'
-import { linkStyle } from '../_styledComponents'
 
 const styleSheet = createStyleSheet('Note', theme => ({
   root: {

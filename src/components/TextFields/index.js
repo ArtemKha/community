@@ -96,8 +96,6 @@ class TextFields extends Component {
   addReminder = (time) => {
     const { note } = this.state
     this.handleReminderButton()
-    console.log(time)
-
     this.props.match.params.id === 'new'
       ? this.setState({ remind: time })
       : this.props.updateNote({ ...note, remind: time })

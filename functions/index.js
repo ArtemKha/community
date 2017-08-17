@@ -2,26 +2,29 @@ const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 
 admin.initializeApp(functions.config().firebase)
+const adminId = 'B0S9iLdTCIPmxcddVXAQ8vLO6fa2'
 
-exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{noteId}')
+exports.newNoteAlert = functions.database.ref(`/Users/${adminId}/Notes/{noteId}`)
   .onWrite((event) => {
-    const uid = event.params.uid
     const noteId = event.params.noteId
 
-    const getToken = admin.database().ref('Users').once('value')
+    const getTokens = admin.database().ref('Users').once('value')
       .then((snapshot) => {
-        const token = snapshot.child(uid).child('token').val()
-        return token
+        const tokens = []
+        snapshot.forEach( user => {
+          const token = user.child('token').val()
+          if (token) tokens.push(token)
+        })
+        return tokens
       })
 
     const getNote = admin.database().ref('Users').once('value')
       .then((snapshot) => {
-        const note = snapshot.child(uid).child('Notes').child(noteId).val()
-        console.log('time', note.timestamp)
+        const note = snapshot.child(adminId).child('Notes').child(noteId).val()
         return note
       })
 
-    Promise.all([getToken, getNote]).then(([token, note]) => {
+    Promise.all([getTokens, getNote]).then(([tokens, note]) => {
       const payload = {
         notification: {
           title: note.title,
@@ -29,10 +32,7 @@ exports.newNoteAlert = functions.database.ref('/Users/{uid}/Notes/{noteId}')
         }
       }
 
-      // setTimeout(function(){
-      //   admin.messaging().sendToDevice([token], payload).catch(console.error)
-      // }, 60000);
-
+      admin.messaging().sendToDevice(tokens, payload).catch(console.error)
     })
   })
 

@@ -18,7 +18,15 @@ export const FlexBoxWraped = styled.div`
   flex-wrap: wrap;
   padding: 5%;
 
-  input:disabled,
+  input {
+    color: rgba(153, 38, 175, 1);
+    font-size: 1.25em;
+  }
+
+  input:disabled {
+    color: rgba(153, 38, 175, 0.8);
+  }
+
   textarea:disabled {
     color: rgba(0, 0, 0, 0.7);
   }
@@ -66,7 +74,7 @@ export const NoteListBox = styled.div`
 	}
 
   ::-webkit-scrollbar-track {
-	  background-color: #fafafa;
+	  background-color: rgba(220, 220, 220, 0.5);
     width: 8px;
   }
 
@@ -76,7 +84,7 @@ export const NoteListBox = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #f2efef;
+    background-color: rgb(220, 220, 220);
   }
 `
 
