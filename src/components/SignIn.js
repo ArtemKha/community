@@ -134,9 +134,9 @@ class SignIn extends Component {
               </FlexBox>
             </Toolbar>
             <Button 
-            raised 
-            className={classes.button}
-            onClick={() => auth.signInWithPopup(googleAuthProvider)}>
+              raised 
+              className={classes.button}
+              onClick={() => auth.signInWithPopup(googleAuthProvider)}>
               Sign In with google
               <img src={icon_google} className={classes.googleProviderImg} alt="google"/>
             </Button>

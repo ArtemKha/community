@@ -61,7 +61,7 @@ class Navigation extends Component {
 
     return (
       <div className={classes.root}>
-        <BottomNavigation showLabels>
+        <BottomNavigation value={-1}>
           <BottomNavigationButton
             label="Search"
             icon={<SearchIcon />}
