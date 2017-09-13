@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import { NavLink } from 'react-router-dom'
 
-const styleSheet = createStyleSheet('Buttons', theme => ({
+const styleSheet = theme => ({
   main: {
     margin: theme.spacing.unit,
     position: 'fixed',
@@ -26,7 +26,7 @@ const styleSheet = createStyleSheet('Buttons', theme => ({
   hide: {
     bottom: '-80px',
   }
-}))
+})
 
 Buttons.propTypes = {
   classes: PropTypes.object.isRequired,

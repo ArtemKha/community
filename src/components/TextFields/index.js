@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import Input from 'material-ui/Input/Input'
 import Buttons from './Buttons'
 import Info from './Info'
@@ -8,13 +8,13 @@ import Reminder from './Reminder'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
-const styleSheet = createStyleSheet('TextFields', theme => ({
+const styleSheet = theme => ({
   input: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '100%',
   },
-}))
+})
 
 class TextFields extends Component {
   constructor() {

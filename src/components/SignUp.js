@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { FlexBox, linkStyle, BgSigning } from './_styledComponents'
 
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
-const styleSheet = createStyleSheet('SignUp', {
+const styleSheet = theme => ({
   root: {
     'max-width': '90%',
     paddingTop: '10%',
@@ -99,7 +99,6 @@ class SignUp extends Component {
                   label="E-mail"
                   className={classes.input}
                   onChange={this.handleInputChange}
-                  marginForm
                   />
                   <TextField
                    name="password"
@@ -107,7 +106,6 @@ class SignUp extends Component {
                    className={classes.input}
                    onChange={this.handleInputChange}
                    type="password"
-                   marginForm
                  />
                  <Typography type="body1" className={classes.error}>
                    {this.state.error}

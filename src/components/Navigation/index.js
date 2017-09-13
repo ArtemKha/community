@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import BottomNavigation, { BottomNavigationButton }
   from 'material-ui/BottomNavigation'
 import SearchIcon from 'material-ui-icons/Search'
@@ -9,7 +9,7 @@ import AddCircle from 'material-ui-icons/AddCircle'
 import Menu from './Menu'
 import Search from './Search'
 
-const styleSheet = createStyleSheet('ListDividers', {
+const styleSheet = () => ({
   root: {
     width: '100%',
     position: 'fixed',
