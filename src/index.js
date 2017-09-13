@@ -16,7 +16,8 @@ ReactDOM.render(
 )
 
 registerServiceWorker()
-// notification function
+
+// notification log function
 messaging.onMessage((payload) => {
 	console.log(payload)
 })

@@ -1,5 +1,5 @@
 import * as UserActionTypes from '../actiontypes/auth'
-import { auth } from '../firebase'
+import { auth, googleAuthProvider } from '../firebase'
 import registerMessaging from '../request-messaging-permission'
 import { getNotes } from './get_notes'
 import { getUserNotesPath, watchNoteChangedEvent } from './note'
@@ -28,8 +28,10 @@ export function signIn(email, password) {
 
 export function signOut() {
   return dispatch => {
-    dispatch(getdUserRequestedAction())
-    auth.signOut()
+    if (auth.currentUser) {
+      dispatch(getdUserRequestedAction())
+      auth.signOut()
+    }
   }
 }
 

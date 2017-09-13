@@ -4,9 +4,6 @@ import Loadable from 'react-loadable'
 import ReactLoading from 'react-loading'
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from '../MaterialUiTheme'
-// import { createMuiTheme } from 'material-ui/styles';
-
-// const theme = createMuiTheme();
 
 function MyLoadingComponent() {
   return <ReactLoading type="bubbles" color="purple"/>
