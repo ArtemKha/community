@@ -79,11 +79,13 @@ class Navigation extends Component {
         <Menu
           menu={this.state.menu}
           signOut={this.props.signOut}
-          handleMenuDrawer={this.handleMenuDrawer}/>
+          handleMenuDrawer={this.handleMenuDrawer}
+        />
         <Search
           search={this.state.search}
           handleSearchDrawer={this.handleSearchDrawer}
-          handleSearchInput={this.handleSearchInput}/>
+          handleSearchInput={this.handleSearchInput}
+        />
       </div>
     )
   }

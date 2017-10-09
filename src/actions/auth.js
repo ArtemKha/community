@@ -1,5 +1,5 @@
 import * as UserActionTypes from '../actiontypes/auth'
-import { auth, googleAuthProvider } from '../firebase'
+import { auth } from '../firebase'
 import registerMessaging from '../request-messaging-permission'
 import { getNotes } from './get_notes'
 import { getUserNotesPath, watchNoteChangedEvent } from './note'

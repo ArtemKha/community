@@ -1,6 +1,11 @@
 import styled, { keyframes } from 'styled-components'
 import Background from '../../assets/bg_sign.png'
 
+export const Logi = styled.div`
+  background-image: url(${Background});
+  height: 100vh;
+`
+
 export const BgSigning = styled.div`
   background-image: url(${Background});
   height: 100vh;
@@ -17,6 +22,8 @@ export const FlexBoxWraped = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   padding: 5%;
+  opacity: 0;
+  transition: opacity .35s ease;
 
   input {
     color: rgba(153, 38, 175, 1);

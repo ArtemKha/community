@@ -25,6 +25,7 @@ class TextFields extends Component {
       reminder: false,
       isNew: true,
       isNoteDisabled: false,
+      opacity: 0,
     }
   }
 
@@ -40,11 +41,24 @@ class TextFields extends Component {
     this.updateTextFields(this.props.match.params.id)
   }
 
+  componentDidMount() {
+    this.setState({
+      opacity: 1
+    })
+  }
+
   //update view if note changed
   componentWillReceiveProps(nextProps) {
     const nextId = nextProps.match.params.id
     if(this.props.match.params.id !== nextId) {
-      this.updateTextFields(nextId)
+      this.setState({
+        opacity: 0
+      })
+      setTimeout(() => {
+        this.updateTextFields(nextId)
+        this.setState({
+        opacity: 1
+      })}, 350)
     }
   }
 
@@ -159,7 +173,7 @@ class TextFields extends Component {
 
     return (
       <FlexItem>
-        <FlexBoxWraped>
+         <FlexBoxWraped style={{ opacity: this.state.opacity }}> 
           <Input
             name="title"
             placeholder="Title"
