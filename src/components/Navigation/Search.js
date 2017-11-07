@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Input from 'material-ui/Input/Input'
 
-const styleSheet = createStyleSheet('Search', theme => ({
+const styleSheet = theme => ({
   listFull: {
     width: 'auto',
     flex: 'initial',
@@ -12,7 +12,7 @@ const styleSheet = createStyleSheet('Search', theme => ({
   input: {
     margin: theme.spacing.unit,
   },
-}))
+})
 
 Search.propTypes = {
   classes: PropTypes.object.isRequired,

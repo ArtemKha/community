@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { FlexBox, linkStyle } from './_styledComponents'
+import { FlexBox, linkStyle, BgSigning } from './_styledComponents'
+import { auth, googleAuthProvider } from '../firebase'
 
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
+import icon_google from '../assets/icon_google.png'
 
-const styleSheet = createStyleSheet('SignIn', {
+const styleSheet = theme => ({
   root: {
     'max-width': '90%',
     margin: '0 auto',
@@ -27,6 +29,7 @@ const styleSheet = createStyleSheet('SignIn', {
   },
   button: {
    marginTop: '10px',
+   padding: '10px 30px'
   },
   input: {
     width: '100%',
@@ -42,6 +45,10 @@ const styleSheet = createStyleSheet('SignIn', {
   error: {
     color: 'tomato',
   },
+  googleProviderImg: {
+    height: '30px',
+    marginLeft: 'auto'
+  }
 })
 
 class SignIn extends Component {
@@ -98,7 +105,6 @@ class SignIn extends Component {
                 label="E-mail"
                 className={classes.input}
                 onChange={this.handleInputChange}
-                marginForm
                 />
                 <TextField
                  name="password"
@@ -106,7 +112,6 @@ class SignIn extends Component {
                  className={classes.input}
                  onChange={this.handleInputChange}
                  type="password"
-                 marginForm
                />
                <Typography type="body1" className={classes.error}>
                  {this.state.error}
@@ -127,6 +132,13 @@ class SignIn extends Component {
                 </Typography>
               </FlexBox>
             </Toolbar>
+            <Button 
+              raised 
+              className={classes.button}
+              onClick={() => auth.signInWithPopup(googleAuthProvider)}>
+              Sign In with google
+              <img src={icon_google} className={classes.googleProviderImg} alt="google"/>
+            </Button>
           </AppBar>
         </div>
       </div>

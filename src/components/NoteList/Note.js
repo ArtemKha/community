@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 
-const styleSheet = createStyleSheet('Note', theme => ({
+const styleSheet = theme => ({
   root: {
     width: '100%',
     background: theme.palette.background.paper,
     overflow: 'hidden',
   },
-}))
+})
 
 Note.propTypes = {
   classes: PropTypes.object.isRequired,

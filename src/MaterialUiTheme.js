@@ -1,16 +1,15 @@
-import { createMuiTheme  } from 'material-ui/styles'
-import createPalette from 'material-ui/styles/palette'
-import purple from 'material-ui/colors/purple'
-import green from 'material-ui/colors/green'
-import red from 'material-ui/colors/red'
+import { createMuiTheme } from 'material-ui/styles';
+import purple from 'material-ui/colors/purple';
+import green from 'material-ui/colors/green';
+import red from 'material-ui/colors/red';
 
 export default createMuiTheme({
-  palette: createPalette({
-    primary: purple,
-    accent: {
+  palette: {
+    primary: purple, 
+    secondary: {
       ...green,
       A400: '#00e677',
     },
     error: red,
-  }),
-})
+  },
+});

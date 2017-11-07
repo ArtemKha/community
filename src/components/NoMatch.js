@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import { AnimatedBox } from './_styledComponents'
 
-const styleSheet = createStyleSheet('Greeting', {
+const styleSheet = () => ({
   button: {
     marginLeft: 'auto',
     margin: '0 auto',

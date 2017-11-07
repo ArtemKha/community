@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
@@ -15,7 +15,7 @@ import SaveIcon from 'material-ui-icons/Save'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 
-const styleSheet = createStyleSheet('NoteBar', {
+const styleSheet = ({
   root: {
     marginTop: 30,
     width: '100%',

@@ -28,8 +28,10 @@ export function signIn(email, password) {
 
 export function signOut() {
   return dispatch => {
-    dispatch(getdUserRequestedAction())
-    auth.signOut()
+    if (auth.currentUser) {
+      dispatch(getdUserRequestedAction())
+      auth.signOut()
+    }
   }
 }
 

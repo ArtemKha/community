@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import BottomNavigation, { BottomNavigationButton }
   from 'material-ui/BottomNavigation'
 import SearchIcon from 'material-ui-icons/Search'
@@ -9,7 +9,7 @@ import AddCircle from 'material-ui-icons/AddCircle'
 import Menu from './Menu'
 import Search from './Search'
 
-const styleSheet = createStyleSheet('ListDividers', {
+const styleSheet = () => ({
   root: {
     width: '100%',
     position: 'fixed',
@@ -61,7 +61,7 @@ class Navigation extends Component {
 
     return (
       <div className={classes.root}>
-        <BottomNavigation showLabels>
+        <BottomNavigation value={-1}>
           <BottomNavigationButton
             label="Search"
             icon={<SearchIcon />}
@@ -79,11 +79,13 @@ class Navigation extends Component {
         <Menu
           menu={this.state.menu}
           signOut={this.props.signOut}
-          handleMenuDrawer={this.handleMenuDrawer}/>
+          handleMenuDrawer={this.handleMenuDrawer}
+        />
         <Search
           search={this.state.search}
           handleSearchDrawer={this.handleSearchDrawer}
-          handleSearchInput={this.handleSearchInput}/>
+          handleSearchInput={this.handleSearchInput}
+        />
       </div>
     )
   }

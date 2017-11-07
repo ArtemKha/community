@@ -11,6 +11,7 @@ var config = {
 
 export default firebase.initializeApp(config)
 export const auth = firebase.auth()
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 export const database = firebase.database()
 export const messaging = firebase.messaging()
 export const UsersRef = database.ref('/Users')

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, createStyleSheet } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles'
 import Input from 'material-ui/Input/Input'
 import Buttons from './Buttons'
 import Info from './Info'
@@ -8,13 +8,13 @@ import Reminder from './Reminder'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
-const styleSheet = createStyleSheet('TextFields', theme => ({
+const styleSheet = theme => ({
   input: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '100%',
   },
-}))
+})
 
 class TextFields extends Component {
   constructor() {
@@ -24,7 +24,8 @@ class TextFields extends Component {
       info: false,
       reminder: false,
       isNew: true,
-      isNoteDisabled: false
+      isNoteDisabled: false,
+      opacity: 0,
     }
   }
 
@@ -33,35 +34,50 @@ class TextFields extends Component {
     notes: PropTypes.array.isRequired,
     removeNote: PropTypes.func.isRequired,
     addNote: PropTypes.func.isRequired,
-    updateNote: PropTypes.func.isRequired
+    updateNote: PropTypes.func.isRequired,
   }
 
   componentWillMount() {
-    const notes = this.props.notes
-    this.updateTextFields(notes, this.props.match.params.id)
+    this.updateTextFields(this.props.match.params.id)
+  }
+
+  componentDidMount() {
+    this.setState({
+      opacity: 1
+    })
   }
 
   //update view if note changed
   componentWillReceiveProps(nextProps) {
     const nextId = nextProps.match.params.id
-    const { notes } = this.props
     if (this.props.match.params.id !== nextId) {
-      this.updateTextFields(notes, nextId)
+      this.setState({
+        opacity: 0
+      })
+      setTimeout(() => {
+        this.updateTextFields(nextId)
+        this.setState({
+          opacity: 1
+        })
+      }, 350)
     }
   }
 
-  updateTextFields(notes, id) {
+  updateTextFields(id) {
+    const notes = this.props.notes
     let note, flags
-    if (id === "new") {
+
+    if (id === 'new') {
       note = this.createNewNote(notes)
       flags = { isNew: true, isNoteDisabled: false }
       this.setState({ note, ...flags })
     } else {
-      note = notes.find(note => note.id === id)
+      note = notes.find((note) => note.id === id)
       if (note) {
         flags = { isNew: false, isNoteDisabled: true }
         this.setState({ note, ...flags })
-      } else this.props.history.push("/notes")
+      } else
+        this.props.history.push('/notes')
     }
   }
 
@@ -70,11 +86,11 @@ class TextFields extends Component {
     const time = this.getTime()
     return {
       id: this.idGenerator(notes),
-      title: "",
-      text: "",
+      title: '',
+      text: '',
       created: time,
       updated: time,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     }
   }
 
@@ -92,18 +108,20 @@ class TextFields extends Component {
     }
   }
 
-  addReminder = time => {
+  addReminder = (time) => {
     const { note } = this.state
     this.handleReminderButton()
-    this.props.match.params.id === "new"
+    this.props.match.params.id === 'new'
       ? this.setState({ remind: time })
       : this.props.updateNote({ ...note, remind: time })
   }
 
   //function helpers
   idGenerator(array) {
-    if (array.length < 1) return "001"
-    else return "00" + (Number([...array].splice(-1, 1)[0].id) + 1)
+    if (array.length < 1)
+      return '001'
+    else
+      return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
   getTime() {
@@ -111,7 +129,7 @@ class TextFields extends Component {
     const date = ut.toDateString()
     const fulltime = [ut.getHours(), ut.getMinutes(), ut.getSeconds()]
     const time = fulltime.map(number => {
-      if (number < 10) return "0" + number
+      if (number < 10) return '0' + number
       return number
     })
     return `${date} ${time[0]}:${time[1]}:${time[2]}`
@@ -120,19 +138,20 @@ class TextFields extends Component {
   //actions
   removeNote = () => {
     this.props.removeNote(this.state.note.key)
-    this.props.history.push("/notes")
+    this.props.history.push('/notes')
   }
 
   addNote = note => {
     this.props.addNote(note)
-    this.props.history.push("/notes")
+    this.props.history.push('/notes')
   }
 
   //handlers
   handleSaveButton = () => {
-    this.handleOption("isNoteDisabled")
+    this.handleOption('isNoteDisabled')
     this.saveNoteIntoList()
   }
+
 
   handleOption = option => {
     this.setState(prevState => ({
@@ -140,7 +159,7 @@ class TextFields extends Component {
     }))
   }
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({
       note: {
         ...this.state.note,
@@ -155,7 +174,7 @@ class TextFields extends Component {
 
     return (
       <FlexItem>
-        <FlexBoxWraped>
+        <FlexBoxWraped style={{ opacity: this.state.opacity }}>
           <Input
             name="title"
             placeholder="Title"
@@ -170,24 +189,21 @@ class TextFields extends Component {
             isNoteDisabled={isNoteDisabled}
             removeNote={this.removeNote}
             handleSaveButton={this.handleSaveButton}
-            handleInfoButton={() => this.handleOption("info")}
-            handleReminderButton={() => this.handleOption("reminder")}
+            handleInfoButton={() => this.handleOption('info')}
+            handleReminderButton={() => this.handleOption('reminder')}
           />
           <Info
             info={info}
             note={note}
-            handleInfoButton={() => this.handleOption("info")}
+            handleInfoButton={() => this.handleOption('info')}
           />
           <Reminder
             reminder={reminder}
-            handleReminderButton={() => this.handleOption("reminder")}
+            handleReminderButton={() => this.handleOption('reminder')}
             addReminder={this.addReminder}
           />
           <Input
             name="text"
-            ref={comp => {
-              this.InputComponent = comp
-            }}
             placeholder="Note: What's on your mind?"
             className={classes.input}
             rows="6"
