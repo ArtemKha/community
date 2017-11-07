@@ -24,7 +24,7 @@ class TextFields extends Component {
       info: false,
       reminder: false,
       isNew: true,
-      isNoteDisabled: false,
+      isNoteDisabled: false
     }
   }
 
@@ -33,36 +33,35 @@ class TextFields extends Component {
     notes: PropTypes.array.isRequired,
     removeNote: PropTypes.func.isRequired,
     addNote: PropTypes.func.isRequired,
-    updateNote: PropTypes.func.isRequired,
+    updateNote: PropTypes.func.isRequired
   }
 
   componentWillMount() {
-    this.updateTextFields(this.props.match.params.id)
+    const notes = this.props.notes
+    this.updateTextFields(notes, this.props.match.params.id)
   }
 
   //update view if note changed
   componentWillReceiveProps(nextProps) {
     const nextId = nextProps.match.params.id
-    if(this.props.match.params.id !== nextId) {
-      this.updateTextFields(nextId)
+    const { notes } = this.props
+    if (this.props.match.params.id !== nextId) {
+      this.updateTextFields(notes, nextId)
     }
   }
 
-  updateTextFields(id) {
-    const notes = this.props.notes
+  updateTextFields(notes, id) {
     let note, flags
-
-    if (id === 'new') {
+    if (id === "new") {
       note = this.createNewNote(notes)
       flags = { isNew: true, isNoteDisabled: false }
       this.setState({ note, ...flags })
     } else {
-      note = notes.find((note) => note.id === id)
-      if (note){
+      note = notes.find(note => note.id === id)
+      if (note) {
         flags = { isNew: false, isNoteDisabled: true }
         this.setState({ note, ...flags })
-      } else
-        this.props.history.push('/notes')
+      } else this.props.history.push("/notes")
     }
   }
 
@@ -71,11 +70,11 @@ class TextFields extends Component {
     const time = this.getTime()
     return {
       id: this.idGenerator(notes),
-      title: '',
-      text: '',
+      title: "",
+      text: "",
       created: time,
       updated: time,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     }
   }
 
@@ -93,28 +92,26 @@ class TextFields extends Component {
     }
   }
 
-  addReminder = (time) => {
+  addReminder = time => {
     const { note } = this.state
     this.handleReminderButton()
-    this.props.match.params.id === 'new'
+    this.props.match.params.id === "new"
       ? this.setState({ remind: time })
       : this.props.updateNote({ ...note, remind: time })
   }
 
   //function helpers
-  idGenerator (array) {
-    if (array.length < 1)
-      return '001'
-    else
-      return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
+  idGenerator(array) {
+    if (array.length < 1) return "001"
+    else return "00" + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
   getTime() {
     const ut = new Date()
     const date = ut.toDateString()
     const fulltime = [ut.getHours(), ut.getMinutes(), ut.getSeconds()]
-    const time = fulltime.map(number  => {
-      if (number < 10) return '0' + number
+    const time = fulltime.map(number => {
+      if (number < 10) return "0" + number
       return number
     })
     return `${date} ${time[0]}:${time[1]}:${time[2]}`
@@ -123,20 +120,19 @@ class TextFields extends Component {
   //actions
   removeNote = () => {
     this.props.removeNote(this.state.note.key)
-    this.props.history.push('/notes')
+    this.props.history.push("/notes")
   }
 
   addNote = note => {
     this.props.addNote(note)
-    this.props.history.push('/notes')
+    this.props.history.push("/notes")
   }
 
   //handlers
   handleSaveButton = () => {
-    this.handleOption('isNoteDisabled')
+    this.handleOption("isNoteDisabled")
     this.saveNoteIntoList()
   }
-
 
   handleOption = option => {
     this.setState(prevState => ({
@@ -144,7 +140,7 @@ class TextFields extends Component {
     }))
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({
       note: {
         ...this.state.note,
@@ -174,21 +170,24 @@ class TextFields extends Component {
             isNoteDisabled={isNoteDisabled}
             removeNote={this.removeNote}
             handleSaveButton={this.handleSaveButton}
-            handleInfoButton={() => this.handleOption('info')}
-            handleReminderButton={() => this.handleOption('reminder')}
+            handleInfoButton={() => this.handleOption("info")}
+            handleReminderButton={() => this.handleOption("reminder")}
           />
           <Info
             info={info}
             note={note}
-            handleInfoButton={() => this.handleOption('info')}
+            handleInfoButton={() => this.handleOption("info")}
           />
           <Reminder
             reminder={reminder}
-            handleReminderButton={() => this.handleOption('reminder')}
+            handleReminderButton={() => this.handleOption("reminder")}
             addReminder={this.addReminder}
           />
           <Input
             name="text"
+            ref={comp => {
+              this.InputComponent = comp
+            }}
             placeholder="Note: What's on your mind?"
             className={classes.input}
             rows="6"

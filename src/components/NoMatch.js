@@ -37,7 +37,7 @@ function NoMatch ({ classes, history })  {
       <AppBar position="static" color="default">
         <Toolbar className={classes.container}>
           <Typography type="subheading" color="inherit">
-            =( Opps... there is no such thing.
+            Opps... there is no such thing.
           </Typography>
           <Button raised color="primary" className={classes.button} onClick={toHome}>
             Show notes

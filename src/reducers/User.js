@@ -1,6 +1,6 @@
 import * as UserActionTypes from '../actiontypes/auth'
 
-export default (state = null, action) => {
+export default function User (state = null, action) {
   switch (action.type) {
     case UserActionTypes.SIGNED_IN:
       return action.user

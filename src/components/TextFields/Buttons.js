@@ -32,21 +32,19 @@ Buttons.propTypes = {
   classes: PropTypes.object.isRequired,
   handleSaveButton: PropTypes.func.isRequired,
   isNoteDisabled: PropTypes.bool.isRequired,
-}
+} 
 
 function Buttons({ classes, isNoteDisabled, handleSaveButton }) {
   const hiddenClass = !isNoteDisabled && classes.hide
-  const mainClass = `${classes.main} ${hiddenClass}`
-  const shiftedClass = `${classes.shifted} ${hiddenClass}`
 
   return (
     <div>
-      <Button fab color="accent" className={mainClass}
+      <Button fab color="accent" className={classes.main + ` ${hiddenClass}`}
         onClick={handleSaveButton}>
         <EditIcon />
       </Button>
       <NavLink to={`/notes`}>
-        <Button fab color="default" className={shiftedClass}>
+        <Button fab color="default" className={classes.shifted + ` ${hiddenClass}`}>
           <ArrowBack />
         </Button>
       </NavLink>
