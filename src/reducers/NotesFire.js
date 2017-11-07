@@ -13,7 +13,7 @@ export default function NotesFb(state = [], action) {
       return state.filter(note => note.key !== action.key)
 
     case NoteActionTypes.EDIT_NOTE:
-    const { title, text, timestamp, updatedm, key } = action.note
+    const { title, text, timestamp, updated, key } = action.note
 
     state.map(note => {
       note.key !== key
@@ -28,6 +28,6 @@ export default function NotesFb(state = [], action) {
     })
 
     default:
-      return state;
+      return state
   }
 }
