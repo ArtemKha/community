@@ -1,6 +1,6 @@
 FROM node:latest
 
-MAINTAINER A.Khasanov
+MAINTAINER Artem Khasanov
 
 ENV NODE_ENV=development 
 ENV PORT=3000
