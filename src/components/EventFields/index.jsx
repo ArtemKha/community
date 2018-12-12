@@ -45,7 +45,7 @@ const EventFields = ({ params, classes }) => {
       <Typography variant="h4" gutterBottom>
         {note.title}
       </Typography>
-      <Divider gutterBottom />
+      <Divider />
       <br />
       <Typography variant="body1" gutterBottom>
         {note.text}

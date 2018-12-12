@@ -1,7 +1,7 @@
 import React from 'react'
 import Navigation from '../../containers/Navigation'
 import EventFields from '../EventFields'
-import { FlexBox, MobileHiddenBox } from '../_styledComponents'
+import { FlexBox } from '../_styledComponents'
 
 function NoteView({ match: { params } }) {
   return (
