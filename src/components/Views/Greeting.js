@@ -36,7 +36,7 @@ function Greeting({ classes, history }) {
           <Toolbar className={classes.container}>
             <Hidden smDown>
               <Typography type="subheading" color="inherit">
-                Click 'New note' to save your great ideas!
+                Click here to publish your event!
               </Typography>
             </Hidden>
             <Button
@@ -45,7 +45,7 @@ function Greeting({ classes, history }) {
               className={classes.button}
               onClick={addNew}
             >
-              New note
+              New event
             </Button>
           </Toolbar>
         </AppBar>
