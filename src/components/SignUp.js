@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Title from './shared/Title'
 
 const styleSheet = theme =>
   createStyles({
@@ -88,6 +89,7 @@ class SignUp extends Component {
 
     return (
       <div className={classes.root}>
+        <Title />
         <div className={classes.paper}>
           <AppBar position="static" color="default">
             <Toolbar className={classes.container}>
