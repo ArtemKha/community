@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Input from 'material-ui/Input/Input'
+import { withStyles, createStyles } from '@material-ui/styles'
+import Input from '@material-ui/core/Input/Input'
 import Buttons from './Buttons'
 import Info from './Info'
 import Reminder from './Reminder'
 import NoteBar from './NoteBar'
 import { FlexBoxWraped, DesktopHiddenBox, FlexItem } from '../_styledComponents'
 
-const styleSheet = theme => ({
-  input: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '100%',
-  },
-})
+const styleSheet = theme =>
+  createStyles({
+    input: {
+      width: '100%'
+    }
+  })
 
 class TextFields extends Component {
   constructor() {
@@ -25,7 +24,7 @@ class TextFields extends Component {
       reminder: false,
       isNew: true,
       isNoteDisabled: false,
-      opacity: 0,
+      opacity: 0
     }
   }
 
@@ -34,7 +33,7 @@ class TextFields extends Component {
     notes: PropTypes.array.isRequired,
     removeNote: PropTypes.func.isRequired,
     addNote: PropTypes.func.isRequired,
-    updateNote: PropTypes.func.isRequired,
+    updateNote: PropTypes.func.isRequired
   }
 
   componentWillMount() {
@@ -72,12 +71,11 @@ class TextFields extends Component {
       flags = { isNew: true, isNoteDisabled: false }
       this.setState({ note, ...flags })
     } else {
-      note = notes.find((note) => note.id === id)
+      note = notes.find(note => note.id === id)
       if (note) {
         flags = { isNew: false, isNoteDisabled: true }
         this.setState({ note, ...flags })
-      } else
-        this.props.history.push('/notes')
+      } else this.props.history.push('/notes')
     }
   }
 
@@ -90,7 +88,7 @@ class TextFields extends Component {
       text: '',
       created: time,
       updated: time,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     }
   }
 
@@ -108,7 +106,7 @@ class TextFields extends Component {
     }
   }
 
-  addReminder = (time) => {
+  addReminder = time => {
     const { note } = this.state
     this.handleReminderButton()
     this.props.match.params.id === 'new'
@@ -118,10 +116,8 @@ class TextFields extends Component {
 
   //function helpers
   idGenerator(array) {
-    if (array.length < 1)
-      return '001'
-    else
-      return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
+    if (array.length < 1) return '001'
+    else return '00' + (Number([...array].splice(-1, 1)[0].id) + 1)
   }
 
   getTime() {
@@ -152,14 +148,13 @@ class TextFields extends Component {
     this.saveNoteIntoList()
   }
 
-
   handleOption = option => {
     this.setState(prevState => ({
       [option]: !prevState[option]
     }))
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({
       note: {
         ...this.state.note,

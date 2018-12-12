@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Note from './Note'
-import Button from 'material-ui/Button'
+import Button from '@material-ui/core/Button'
 import { NoteListBox } from '../_styledComponents'
 import ReactLoading from 'react-loading'
 import { sort, prop, descend } from 'ramda'
 
 class Notes extends Component {
-
   static propTypes = {
     notes: PropTypes.array.isRequired,
     history: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     filter: PropTypes.string.isRequired,
-    showAll: PropTypes.func.isRequired,
+    showAll: PropTypes.func.isRequired
   }
 
   filteredOutcome(array, query) {
@@ -31,15 +30,16 @@ class Notes extends Component {
     const sotrtedList = sort(descend(prop('timestamp')))(filteredList)
 
     const NoteList = sotrtedList.map((note, i) => (
-      <Note note={note} key={note.key} index={i} history={this.props.history}/>
+      <Note note={note} key={note.key} index={i} history={this.props.history} />
     ))
 
-    const NoNotesPlaceholer =  filter &&
-      <Button onClick={showAll} style={{width: '100%'}}>
+    const NoNotesPlaceholer = filter && (
+      <Button onClick={showAll} style={{ width: '100%' }}>
         Click to show all notes
       </Button>
-    const NotesLoading = () => loading &&
-      <ReactLoading type="bubbles" color="purple"/>
+    )
+    const NotesLoading = () =>
+      loading && <ReactLoading type="bubbles" color="purple" />
 
     return (
       <NoteListBox>

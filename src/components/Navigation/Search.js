@@ -1,31 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Drawer from 'material-ui/Drawer'
-import Input from 'material-ui/Input/Input'
+import { withStyles, createStyles } from '@material-ui/styles'
+import Drawer from '@material-ui/core/Drawer'
+import Input from '@material-ui/core/Input/Input'
 
-const styleSheet = theme => ({
-  listFull: {
-    width: 'auto',
-    flex: 'initial',
-  },
-  input: {
-    margin: theme.spacing.unit,
-  },
-})
+const styleSheet = theme =>
+  createStyles({
+    listFull: {
+      width: 'auto',
+      flex: 'initial'
+    }
+  })
 
 Search.propTypes = {
   classes: PropTypes.object.isRequired,
   handleSearchDrawer: PropTypes.func.isRequired,
-  search: PropTypes.bool.isRequired,
+  search: PropTypes.bool.isRequired
 }
 
-function Search({classes, search, handleSearchDrawer, handleSearchInput}) {
+function Search({ classes, search, handleSearchDrawer, handleSearchInput }) {
   return (
     <Drawer
       anchor="bottom"
       open={search}
-      onRequestClose={handleSearchDrawer}
+      onClose={handleSearchDrawer}
       onClick={handleSearchDrawer}
     >
       <Input

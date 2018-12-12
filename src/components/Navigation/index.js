@@ -1,29 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import BottomNavigation, { BottomNavigationButton }
-  from 'material-ui/BottomNavigation'
-import SearchIcon from 'material-ui-icons/Search'
-import MenuIcon from 'material-ui-icons/Menu'
-import AddCircle from 'material-ui-icons/AddCircle'
+import { withStyles, createStyles } from '@material-ui/styles'
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationButton from '@material-ui/core/BottomNavigationAction'
+
+import SearchIcon from '@material-ui/icons/Search'
+import MenuIcon from '@material-ui/icons/Menu'
+import AddCircle from '@material-ui/icons/AddCircle'
 import Menu from './Menu'
 import Search from './Search'
 
-const styleSheet = () => ({
+const styleSheet = createStyles({
   root: {
     width: '100%',
     position: 'fixed',
     bottom: 0,
-    zIndex: 1,
-  },
+    zIndex: 1
+  }
 })
 
 class Navigation extends Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
       menu: false,
-      search: false,
+      search: false
     }
   }
 
@@ -31,7 +32,7 @@ class Navigation extends Component {
     classes: PropTypes.object.isRequired,
     selectNote: PropTypes.func.isRequired,
     signOut: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
   }
 
   handleMenuDrawer = () => {
@@ -48,7 +49,7 @@ class Navigation extends Component {
     })
   }
 
-  handleSearchInput = (filter) => {
+  handleSearchInput = filter => {
     this.props.selectNote(filter)
   }
 
@@ -65,15 +66,18 @@ class Navigation extends Component {
           <BottomNavigationButton
             label="Search"
             icon={<SearchIcon />}
-            onClick={this.handleSearchDrawer} />
+            onClick={this.handleSearchDrawer}
+          />
           <BottomNavigationButton
-            label={"New"}
-            icon={<AddCircle/>}
-            onClick={this.handleNewButton}/>
+            label={'New'}
+            icon={<AddCircle />}
+            onClick={this.handleNewButton}
+          />
           <BottomNavigationButton
             label="Menu"
             icon={<MenuIcon />}
-            onClick={this.handleMenuDrawer}/>
+            onClick={this.handleMenuDrawer}
+          />
         </BottomNavigation>
 
         <Menu

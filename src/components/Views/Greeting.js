@@ -1,31 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button'
-import Hidden from 'material-ui/Hidden'
+import { withStyles, createStyles } from '@material-ui/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Hidden from '@material-ui/core/Hidden'
 import { AnimatedBox } from '../_styledComponents'
 
-const styleSheet = () => ({
+const styleSheet = createStyles({
   button: {
-    margin: '0 auto',
+    margin: '0 auto'
   },
   paper: {
     margin: '20px',
     width: '100%',
-    height: 'auto',
+    height: 'auto'
   }
 })
 
 Greeting.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 function Greeting({ classes, history }) {
-
   const addNew = () => {
     history.push('/notes/new')
   }
@@ -40,7 +39,12 @@ function Greeting({ classes, history }) {
                 Click 'New note' to save your great ideas!
               </Typography>
             </Hidden>
-            <Button raised color="primary" className={classes.button} onClick={addNew}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={addNew}
+            >
               New note
             </Button>
           </Toolbar>

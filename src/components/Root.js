@@ -2,11 +2,11 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import ReactLoading from 'react-loading'
-import { MuiThemeProvider } from 'material-ui/styles'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 import theme from '../MaterialUiTheme'
 
 function MyLoadingComponent() {
-  return <ReactLoading type="bubbles" color="purple"/>
+  return <ReactLoading type="bubbles" color="purple" />
 }
 
 const SignUp = Loadable({
@@ -44,16 +44,16 @@ function Root() {
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={SignIn}/>
-          <PrivateRoute exact path="/notes" component={ListView}/>
-          <PrivateRoute path="/notes/:id" component={NoteView}/>
-          <Route path="/signup" component={SignUp}/>
-          <Route path="/signin" component={SignIn}/>
-          <Route path="/404" component={NoMatch}/>
-          <Route component={NoMatch}/>
+          <Route exact path="/" component={SignIn} />
+          <PrivateRoute exact path="/notes" component={ListView} />
+          <PrivateRoute path="/notes/:id" component={NoteView} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/404" component={NoMatch} />
+          <Route component={NoMatch} />
         </Switch>
       </BrowserRouter>
-		</MuiThemeProvider>
+    </MuiThemeProvider>
   )
 }
 

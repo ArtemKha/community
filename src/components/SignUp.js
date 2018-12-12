@@ -3,49 +3,50 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { FlexBox, linkStyle } from './_styledComponents'
 
-import { withStyles } from 'material-ui/styles'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import TextField from 'material-ui/TextField'
-import Button from 'material-ui/Button'
+import { withStyles, createStyles } from '@material-ui/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
-const styleSheet = theme => ({
-  root: {
-    'max-width': '90%',
-    paddingTop: '10%',
-    margin: '0 auto',
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    height: 'auto',
-    padding: 30,
-  },
-  button: {
-   marginTop: '10px',
-  },
-  input: {
-    width: '100%',
-  },
-  paper: {
-    'max-width': '450px',
-    margin: '0 auto',
-  },
-  typo: {
-    marginLeft: '10px',
-    marginTop: '10px',
-  },
-  error: {
-    color: 'tomato',
-  },
-})
+const styleSheet = theme =>
+  createStyles({
+    root: {
+      'max-width': '90%',
+      paddingTop: '10%',
+      margin: '0 auto'
+    },
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      height: 'auto',
+      padding: 30
+    },
+    button: {
+      marginTop: '10px'
+    },
+    input: {
+      width: '100%'
+    },
+    paper: {
+      'max-width': '450px',
+      margin: '0 auto'
+    },
+    typo: {
+      marginLeft: '10px',
+      marginTop: '10px'
+    },
+    error: {
+      color: 'tomato'
+    }
+  })
 
 class SignUp extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       email: '',
@@ -58,7 +59,7 @@ class SignUp extends Component {
     classes: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     signUp: PropTypes.func.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.object
   }
 
   componentWillMount() {
@@ -71,14 +72,14 @@ class SignUp extends Component {
   }
 
   signUp = () => {
-    const {email, password} = this.state
+    const { email, password } = this.state
     this.props.signUp(email, password)
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
+    })
   }
 
   render() {
@@ -93,27 +94,27 @@ class SignUp extends Component {
               <Typography type="title" color="inherit">
                 Sign Up
               </Typography>
-                <TextField
+              <TextField
                 name="email"
                 label="E-mail"
                 className={classes.input}
                 onChange={this.handleInputChange}
                 marginForm
-                />
-                <TextField
-                 name="password"
-                 label="Password"
-                 className={classes.input}
-                 onChange={this.handleInputChange}
-                 type="password"
-                 marginForm
-               />
-               <Typography type="body1" className={classes.error}>
-                 {this.state.error}
-               </Typography>
-               <FlexBox>
+              />
+              <TextField
+                name="password"
+                label="Password"
+                className={classes.input}
+                onChange={this.handleInputChange}
+                type="password"
+                marginForm
+              />
+              <Typography type="body1" className={classes.error}>
+                {this.state.error}
+              </Typography>
+              <FlexBox>
                 <Button
-                  raised
+                  variant="contained"
                   color="primary"
                   className={classes.button}
                   onClick={this.signUp}
@@ -121,9 +122,15 @@ class SignUp extends Component {
                 >
                   Sign Up
                 </Button>
-                <Typography type="body1" color="inherit" className={classes.typo}>
+                <Typography
+                  type="body1"
+                  color="inherit"
+                  className={classes.typo}
+                >
                   Do you have an account? <br />
-                  <Link to={'/signin'} style={linkStyle}>Sign In</Link>
+                  <Link to={'/signin'} style={linkStyle}>
+                    Sign In
+                  </Link>
                 </Typography>
               </FlexBox>
             </Toolbar>
