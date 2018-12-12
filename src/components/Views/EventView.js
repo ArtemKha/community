@@ -6,9 +6,7 @@ import { FlexBox, MobileHiddenBox } from '../_styledComponents'
 function NoteView({ match: { params } }) {
   return (
     <FlexBox>
-      <MobileHiddenBox>
-        <Navigation />
-      </MobileHiddenBox>
+      <Navigation />
       <EventFields params={params} />
     </FlexBox>
   )

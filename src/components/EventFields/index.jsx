@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import Input from '@material-ui/core/Input/Input'
+import Typography from '@material-ui/core/Typography'
 import { withStyles, createStyles } from '@material-ui/styles'
+import Divider from '@material-ui/core/Divider'
 import { UsersRef } from '../../firebase'
 import { FlexItem } from '../_styledComponents'
 
 const styleSheet = theme =>
   createStyles({
-    input: {
-      width: '100%'
-    },
     eventBox: {
-      padding: '10px'
+      padding: '10px',
+      maxWidth: '90%'
     },
     title: {
       fontWight: 700
@@ -19,8 +18,8 @@ const styleSheet = theme =>
 
 const useNoteGetter = ({ userId, noteId }) => {
   const [note, setNote] = useState({
-    title: '',
-    text: ''
+    title: ' ',
+    text: 'Connecting...'
   })
 
   useEffect(
@@ -43,25 +42,14 @@ const EventFields = ({ params, classes }) => {
 
   return (
     <FlexItem className={classes.eventBox}>
-      <Input
-        className={classes.title}
-        name="title"
-        placeholder=""
-        value={note.title}
-        disableUnderline
-        className={classes.input}
-      />
+      <Typography variant="h4" gutterBottom>
+        {note.title}
+      </Typography>
+      <Divider gutterBottom />
       <br />
-      <Input
-        name="text"
-        placeholder=""
-        rows="6"
-        value={note.text}
-        multiline
-        rowsMax="20"
-        disableUnderline
-        className={classes.input}
-      />
+      <Typography variant="body1" gutterBottom>
+        {note.text}
+      </Typography>
     </FlexItem>
   )
 }

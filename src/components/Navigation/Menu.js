@@ -44,7 +44,7 @@ class Menu extends Component {
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="Box" />
+            <ListItemText primary="Events" />
           </ListItem>
         </Link>
         <ListItem button>
