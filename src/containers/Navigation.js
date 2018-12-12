@@ -4,4 +4,9 @@ import { selectNote } from '../actions/filter'
 import { signOut } from '../actions/auth'
 import Navigation from '../components/Navigation'
 
-export default withRouter(connect(null, { selectNote, signOut })(Navigation))
+export default withRouter(
+  connect(
+    null,
+    { selectNote, signOut }
+  )(Navigation)
+)

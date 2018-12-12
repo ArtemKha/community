@@ -9,15 +9,15 @@ import theme from './MaterialUiTheme'
 
 const store = configureStore()
 ReactDOM.render(
-	<Provider store={store} >
-		<Root theme={theme}/>
+  <Provider store={store}>
+    <Root theme={theme} />
   </Provider>,
-	document.getElementById('root')
+  document.getElementById('root')
 )
 
 registerServiceWorker()
 
 // notification log function
-messaging.onMessage((payload) => {
-	console.log(payload)
+messaging.onMessage(payload => {
+  console.log(payload)
 })

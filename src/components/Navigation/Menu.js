@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 import { withStyles, createStyles } from '@material-ui/styles'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -39,12 +39,14 @@ class Menu extends Component {
     const { classes, menu, handleMenuDrawer } = this.props
     const mailFolderListItems = (
       <div>
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Box" />
-        </ListItem>
+        <Link to="/notes">
+          <ListItem button>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Box" />
+          </ListItem>
+        </Link>
         <ListItem button>
           <ListItemIcon>
             <StarIcon />

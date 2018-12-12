@@ -1,9 +1,11 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
+const databaseURL = 'https://justnote-3337b.firebaseio.com'
+const appURL = 'https://justnote-3337b.firebaseapp.com'
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  databaseURL: 'https://justnote-3337b.firebaseio.com'
+  databaseURL
 })
 
 exports.newNoteAlert = functions.database
@@ -42,7 +44,8 @@ exports.newNoteAlert = functions.database
       const payload = {
         notification: {
           title: note.title,
-          body: note.text
+          body: note.text,
+          click_action: `${appURL}/events/${userId}/${noteId}`
         }
       }
 
@@ -52,10 +55,3 @@ exports.newNoteAlert = functions.database
         .catch(console.error)
     })
   })
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });

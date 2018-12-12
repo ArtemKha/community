@@ -40,6 +40,7 @@ function Buttons({ classes, isNoteDisabled, handleSaveButton }) {
   return (
     <div>
       <Fab
+        color="secondary"
         className={classes.main + ` ${hiddenClass}`}
         onClick={handleSaveButton}
       >

@@ -165,11 +165,11 @@ class TextFields extends Component {
 
   render() {
     const classes = this.props.classes
-    const { note, isNoteDisabled, isNew, info, reminder } = this.state
+    const { note, isNoteDisabled, isNew, info, reminder, opacity } = this.state
 
     return (
       <FlexItem>
-        <FlexBoxWraped style={{ opacity: this.state.opacity }}>
+        <FlexBoxWraped style={{ opacity }}>
           <Input
             name="title"
             placeholder="Title"

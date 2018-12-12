@@ -29,6 +29,11 @@ const NoteView = Loadable({
   loading: MyLoadingComponent
 })
 
+const EventView = Loadable({
+  loader: () => import('./Views/EventView'),
+  loading: MyLoadingComponent
+})
+
 const NoMatch = Loadable({
   loader: () => import('./NoMatch'),
   loading: MyLoadingComponent
@@ -47,6 +52,7 @@ function Root() {
           <Route exact path="/" component={SignIn} />
           <PrivateRoute exact path="/notes" component={ListView} />
           <PrivateRoute path="/notes/:id" component={NoteView} />
+          <Route path="/events/:userId/:noteId" component={EventView} />
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/404" component={NoMatch} />

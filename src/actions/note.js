@@ -33,12 +33,11 @@ export function updateNote(note) {
 export function watchNoteChangedEvent(user) {
   NotesRef = UsersRef.child(user.uid).child('/Notes')
   return dispatch => {
-
-    NotesRef.on('child_removed', (snap) => {
+    NotesRef.on('child_removed', snap => {
       dispatch(destroyNote(snap.key))
     })
 
-    NotesRef.on('child_changed', (snap) => {
+    NotesRef.on('child_changed', snap => {
       dispatch(changeNote(snap.val()))
     })
   }
